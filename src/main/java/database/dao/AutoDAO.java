@@ -120,7 +120,7 @@ public class AutoDAO {
                 throw e;
             }
         }
-        return commands;
+        return auto;
     }
 
 
