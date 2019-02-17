@@ -6,6 +6,14 @@ package DataStructureClasses;
 public class Cycle {
 
     /**
+     * The Id.
+     */
+    int id;
+    /**
+     * The Cycle number.
+     */
+    int cycleNumber;
+    /**
      * The Field element.
      */
     char fieldElement = ' ';
@@ -26,6 +34,8 @@ public class Cycle {
      */
     boolean drop;
 
+
+
     /**
      * Instantiates a new Cycle.
      */
@@ -40,8 +50,10 @@ public class Cycle {
      * @param place        the place
      * @param defense      the defense
      * @param drop         the drop
+     * @param cycleNumber  the cycle number
+     * @param id           the id
      */
-    public Cycle(char fieldElement, String pickUp, String place, boolean defense, boolean drop) {
+    public Cycle(char fieldElement, String pickUp, String place, boolean defense, boolean drop, int cycleNumber, int id) {
         this.fieldElement = fieldElement;
         this.pickUp = pickUp;
         this.place = place;
@@ -137,5 +149,41 @@ public class Cycle {
      */
     public void setDrop(boolean drop) {
         this.drop = drop;
+    }
+
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * Gets cycle number.
+     *
+     * @return the cycle number
+     */
+    public int getCycleNumber() {
+        return cycleNumber;
+    }
+
+    /**
+     * Sets cycle number.
+     *
+     * @param cycleNumber the cycle number
+     */
+    public void setCycleNumber(int cycleNumber) {
+        this.cycleNumber = cycleNumber;
     }
 }

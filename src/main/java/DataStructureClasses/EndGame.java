@@ -6,6 +6,10 @@ package DataStructureClasses;
 public class EndGame {
 
     /**
+     * The Id.
+     */
+    int id;
+    /**
      * The Level one.
      */
     boolean levelOne;
@@ -45,14 +49,16 @@ public class EndGame {
      * @param ramp        the ramp
      * @param timeToClimb the time to climb
      * @param failLevel   the fail level
+     * @param id          the id
      */
-    public EndGame(boolean levelOne, boolean levelTwo, boolean levelThree, boolean ramp, float timeToClimb, char failLevel) {
+    public EndGame(boolean levelOne, boolean levelTwo, boolean levelThree, boolean ramp, float timeToClimb, char failLevel, int id) {
         this.levelOne = levelOne;
         this.levelTwo = levelTwo;
         this.levelThree = levelThree;
         this.ramp = ramp;
         this.timeToClimb = timeToClimb;
         this.failLevel = failLevel;
+        this.id = id;
     }
 
     /**
@@ -161,5 +167,23 @@ public class EndGame {
      */
     public void setFailLevel(char failLevel) {
         this.failLevel = failLevel;
+    }
+
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Sets id.
+     *
+     * @param id the id
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 }

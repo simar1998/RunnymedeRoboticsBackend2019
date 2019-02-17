@@ -1,6 +1,6 @@
 package database.dao;
 
-import DataStructureClasses.Auto;
+import DataStructureClasses.EndGame;
 import database.JDBCHelper;
 
 import java.sql.Connection;
@@ -8,28 +8,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 /**
- * The type Auto dao.
+ * The type End game dao.
  */
-public class AutoDAO {
-
+public class EndGameDAO {
     /**
      * The constant INSERT_SQL_QUERRY.
      */
-    public static final String INSERT_SQL_QUERRY = "INSERT INTO AUTO(ID,STRING_POS,PLACE_POS,STARTING_OBJ,TIME_VAL) VALUES (?,?,?,?,?)";
+    public static final String INSERT_SQL_QUERRY = "INSERT INTO END_GAME (ID,LEVEL_ONE,LEVEL_TWO,LEVEL_THREE,RAMP,TIME_TO_CLIMB,FAIL_LEVEL) VALUES(?,?,?,?,?,?,?)";
     /**
      * The constant SELECT_SQL_QUERRY.
      */
-    public static final String SELECT_SQL_QUERRY = "SELECT ID,STRING_POS,PLACE_POS,STARTING_OBJ,TIME FROM AUTO WHERE ID=?";
+    public static final String SELECT_SQL_QUERRY = "SELECT ID,LEVEL_ONE,LEVEL_TWO,LEVEL_THREE,RAMPS,TIME_TO_CLIMB,FAIL_LEVEL FROM END_GAME WHERE ID=?";
 
     /**
      * Insert auto sql.
      *
-     * @param auto the auto
+     * @param endGame the end game
      * @throws SQLException the sql exception
      */
-    public static void insertAutoSQL(Auto auto) throws SQLException{
+    public static void insertAutoSQL(EndGame endGame) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
 
@@ -40,11 +38,13 @@ public class AutoDAO {
                 return;
             }
             ps = con.prepareStatement(INSERT_SQL_QUERRY);
-            ps.setInt(1,auto.getId());
-            ps.setString(2,auto.getStartPos());
-            ps.setString(3,auto.getPlacePos());
-            ps.setString(4,auto.getStartingObj() + "");
-            ps.setFloat(5,auto.getTime());
+            ps.setInt(1,endGame.getId());
+            ps.setBoolean(2,endGame.isLevelOne());
+            ps.setBoolean(3,endGame.isLevelTwo());
+            ps.setBoolean(4,endGame.isLevelThree());
+            ps.setBoolean(5,endGame.isRamp());
+            ps.setFloat(6,endGame.getTimeToClimb());
+            ps.setString(7, endGame.getFailLevel() + "");
             ps.execute();
             System.out.println("SQL QUERRY ===> " + ps.toString());
             con.commit();
@@ -71,16 +71,17 @@ public class AutoDAO {
 
 
     /**
-     * Select  sql auto.
+     * Select endgame
      *
-     * @return the auto
+     * @param id the id
+     * @return the cycle
      * @throws SQLException the sql exception
      */
-    public static Auto selectAuto(int id) throws SQLException{
+    public static EndGame selectEndgame(int id) throws SQLException{
         Connection con = null;
         PreparedStatement ps= null;
         ResultSet rs = null;
-        Auto auto = new Auto();
+        EndGame endGame = new EndGame();
 
         try
         {
@@ -93,14 +94,15 @@ public class AutoDAO {
             ps.setInt(1,id);
             rs = ps.executeQuery();
             System.out.println( "retriveCommands => " + ps.toString() );
-            while (rs.next())
-            {
-                auto.setId(rs.getInt("ID"));
-                auto.setStartPos(rs.getString("STRING_POS"));
-                auto.setPlacePos(rs.getString("PLACE_POS"));
-                auto.setStartingObj(rs.getString("STARTING_OBJ").charAt(0));
-                auto.setTime(rs.getFloat("TIME_VAL"));
-            }
+
+           endGame.setId(rs.getInt("ID"));
+           endGame.setLevelOne(rs.getBoolean("LEVEL_ONE"));
+           endGame.setLevelTwo(rs.getBoolean("LEVEL_TWO"));
+           endGame.setLevelThree(rs.getBoolean("LEVEL_THREE"));
+           endGame.setRamp(rs.getBoolean("RAMP"));
+           endGame.setTimeToClimb(rs.getFloat("TIME_TO_CLIMB"));
+           endGame.setFailLevel(rs.getString("FAIL_LEVEL").charAt(0));
+
 
         }
         catch (SQLException e)
@@ -120,15 +122,11 @@ public class AutoDAO {
                 throw e;
             }
         }
-        return auto;
+        return endGame;
     }
 
 
 
-
-
-
-
-
-
 }
+
+
