@@ -3,6 +3,8 @@ package database;
 import java.sql.*;
 
 /**
+ * The type Jdbc helper.
+ *
  * @author Simar
  */
 public class JDBCHelper
@@ -21,6 +23,9 @@ public class JDBCHelper
       }
    }
 
+   /**
+    * Load driver.
+    */
    public static void loadDriver(){
       try
       {
@@ -32,12 +37,24 @@ public class JDBCHelper
       }
    }
 
+   /**
+    * Gets connection.
+    *
+    * @return the connection
+    * @throws SQLException the sql exception
+    */
    public static Connection getConnection() throws SQLException
    {
       connection = DriverManager.getConnection( JDBCConstants.URL, JDBCConstants.USERNAME, JDBCConstants.PASSWORD );
       return connection;
    }
 
+   /**
+    * Close connection.
+    *
+    * @param con the con
+    * @throws SQLException the sql exception
+    */
    public static void closeConnection( Connection con ) throws SQLException
    {
       if ( con != null )
@@ -46,6 +63,12 @@ public class JDBCHelper
       }
    }
 
+   /**
+    * Close prepaerd statement.
+    *
+    * @param stmt the stmt
+    * @throws SQLException the sql exception
+    */
    public static void closePrepaerdStatement( PreparedStatement stmt ) throws SQLException
    {
       if ( stmt != null )
@@ -54,6 +77,12 @@ public class JDBCHelper
       }
    }
 
+   /**
+    * Close result set.
+    *
+    * @param rs the rs
+    * @throws SQLException the sql exception
+    */
    public static void closeResultSet( ResultSet rs ) throws SQLException
    {
       if ( rs != null )

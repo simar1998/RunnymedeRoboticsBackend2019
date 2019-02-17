@@ -9,11 +9,23 @@ import com.google.gson.Gson;
 import javax.ws.rs.*;
 import java.sql.SQLException;
 
+/**
+ * The type Basic api.
+ */
 @Path("/Database")
 public class BasicAPI {
 
+    /**
+     * The Gson.
+     */
     Gson gson = new Gson();
 
+    /**
+     * Gets init info.
+     *
+     * @param id the id
+     * @return the init info
+     */
     @GET
     @Path("/getInitInfo")
     @Produces("text/plain")
@@ -27,6 +39,12 @@ public class BasicAPI {
        }
     }
 
+    /**
+     * Post init info string.
+     *
+     * @param initInfo the init info
+     * @return the string
+     */
     @POST
     @Path("/addInitInfo")
     @Produces("text/plain")
@@ -41,6 +59,12 @@ public class BasicAPI {
         }
     }
 
+    /**
+     * Gets cycle from database.
+     *
+     * @param id the id
+     * @return the cycle from database
+     */
     @GET
     @Path("/getCycleInfo")
     @Produces("text/plain")
@@ -54,6 +78,12 @@ public class BasicAPI {
         }
     }
 
+    /**
+     * Insert cycle data string.
+     *
+     * @param cycleString the cycle string
+     * @return the string
+     */
     @POST
     @Path("/addCycle")
     @Produces("text/plain")
@@ -68,6 +98,12 @@ public class BasicAPI {
         }
     }
 
+    /**
+     * Gets end game from database.
+     *
+     * @param id the id
+     * @return the end game from database
+     */
     @GET
     @Path("/getEndgame")
     @Produces("text/plain")
@@ -81,6 +117,12 @@ public class BasicAPI {
         }
     }
 
+    /**
+     * Post endgame string.
+     *
+     * @param endGame the end game
+     * @return the string
+     */
     @POST
     @Path("/addEndGame")
     @Produces("text/plain")
@@ -95,6 +137,12 @@ public class BasicAPI {
         }
     }
 
+    /**
+     * Gets auto.
+     *
+     * @param id the id
+     * @return the auto
+     */
     @GET
     @Path("/geAuto")
     @Produces("text/plain")
@@ -108,6 +156,12 @@ public class BasicAPI {
         }
     }
 
+    /**
+     * Post auto string.
+     *
+     * @param auto the auto
+     * @return the string
+     */
     @POST
     @Path("/addAuto")
     @Produces("text/plain")
