@@ -8,6 +8,11 @@
     <artifactId>RunnymedeRoboticsScoutingApplication</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+    </properties>
+
     <dependencies> <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
@@ -44,10 +49,18 @@
             <version>2.8.5</version>
         </dependency>
         <dependency>
+            <groupId>de.serviceflow</groupId>
+            <artifactId>lbt4j</artifactId>
+            <version>0.4.5</version>
+        </dependency>
+        <dependency>
             <groupId>com.j256.ormlite</groupId>
             <artifactId>ormlite-jdbc</artifactId>
             <version>3.4</version>
         </dependency></dependencies>
+
+
+
 
 
     

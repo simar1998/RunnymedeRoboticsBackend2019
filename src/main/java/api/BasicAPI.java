@@ -1,9 +1,6 @@
 package api;
 
-import DataStructureClasses.Auto;
-import DataStructureClasses.Cycle;
-import DataStructureClasses.EndGame;
-import DataStructureClasses.InitInfo;
+import DataStructureClasses.*;
 import com.google.gson.Gson;
 
 import javax.ws.rs.*;
@@ -16,7 +13,7 @@ import java.sql.SQLException;
 public class BasicAPI {
 
     /**
-     * The Gson.
+     * The Gson.ss
      */
     Gson gson = new Gson();
 
@@ -27,7 +24,7 @@ public class BasicAPI {
      * @return the init info
      */
     @GET
-    @Path("/getInitInfo")
+    @Path("/initInfo")
     @Produces("text/plain")
     @Consumes("application/x-xxx-form-urlencoded")
     public String getInitInfo(@QueryParam("id") int id){
@@ -46,7 +43,7 @@ public class BasicAPI {
      * @return the string
      */
     @POST
-    @Path("/addInitInfo")
+    @Path("/intiInfo")
     @Produces("text/plain")
     @Consumes("application/x-xxx-form-urlencoded")
     public String postInitInfo(@FormParam("initInfo") String initInfo){
@@ -66,7 +63,7 @@ public class BasicAPI {
      * @return the cycle from database
      */
     @GET
-    @Path("/getCycleInfo")
+    @Path("/cycle")
     @Produces("text/plain")
     @Consumes("application/x-xxx-form-urlencoded")
     public String getCycleFromDatabase(@QueryParam("id") int id){
@@ -105,7 +102,7 @@ public class BasicAPI {
      * @return the end game from database
      */
     @GET
-    @Path("/getEndgame")
+    @Path("/endGame")
     @Produces("text/plain")
     @Consumes("application/x-xxx-form-urlencoded")
     public String getEndGameFromDatabase(@QueryParam("id") int id){
@@ -124,7 +121,7 @@ public class BasicAPI {
      * @return the string
      */
     @POST
-    @Path("/addEndGame")
+    @Path("/endGame")
     @Produces("text/plain")
     @Consumes("application/x-xxx-form-urlencoded")
     public String postEndgame(@FormParam("endGame") String endGame){
@@ -144,7 +141,7 @@ public class BasicAPI {
      * @return the auto
      */
     @GET
-    @Path("/geAuto")
+    @Path("/auto")
     @Produces("text/plain")
     @Consumes("application/x-xxx-form-urlencoded")
     public String getAuto(@QueryParam("id") int id){
@@ -163,7 +160,7 @@ public class BasicAPI {
      * @return the string
      */
     @POST
-    @Path("/addAuto")
+    @Path("/auto")
     @Produces("text/plain")
     @Consumes("application/x-xxx-form-urlencoded")
     public String postAuto(@FormParam("auto") String auto){
@@ -174,6 +171,15 @@ public class BasicAPI {
         catch (SQLException e){
             return e.toString();
         }
+    }
+
+    @POST
+    @Path("/matchInfo")
+    @Produces("text/plain")
+    @Consumes("application/x-xxx-form-urlencoded")
+    public void submitInfo(@QueryParam("info") String submitInfo){
+        SubmitMatch submitMatch = gson.fromJson(submitInfo, SubmitMatch.class);
+        submitMatch.insertSQL();
     }
 
 }

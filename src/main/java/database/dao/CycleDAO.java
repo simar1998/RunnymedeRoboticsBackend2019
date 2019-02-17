@@ -40,18 +40,17 @@ public class CycleDAO {
                 return;
             }
             ps = con.prepareStatement(INSERT_SQL_QUERRY);
-            ps.setInt(1,cycle.getId());
-            ps.setInt(2,cycle.getCycleNumber());
-            ps.setString(3,cycle.getFieldElement() + "");
-            ps.setString(4,cycle.getPickUp());
-            ps.setString(5,cycle.getPlace());
-            ps.setBoolean(6,cycle.isDefense());
+            ps.setInt(1, cycle.getId());
+            ps.setInt(2, cycle.getCycleNumber());
+            ps.setString(3, cycle.getFieldElement() + "");
+            ps.setString(4, cycle.getPickUp());
+            ps.setString(5, cycle.getPlace());
+            ps.setBoolean(6, cycle.isDefense());
             ps.setBoolean(7, cycle.isDrop());
             ps.execute();
             System.out.println("SQL QUERRY ===> " + ps.toString());
             con.commit();
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             try {
                 if (con != null) {
                     con.rollback();
@@ -60,8 +59,7 @@ public class CycleDAO {
                 throw e1;
             }
             throw e;
-        }
-        finally {
+        } finally {
             try {
                 JDBCHelper.closePrepaerdStatement(ps);
                 JDBCHelper.closeConnection(con);
@@ -79,54 +77,45 @@ public class CycleDAO {
      * @return the cycle
      * @throws SQLException the sql exception
      */
-    public static Cycle selectCycle(int id) throws SQLException{
+    public static Cycle selectCycle(int id) throws SQLException {
         Connection con = null;
-        PreparedStatement ps= null;
+        PreparedStatement ps = null;
         ResultSet rs = null;
         Cycle cycle = new Cycle();
 
-        try
-        {
+        try {
             con = JDBCHelper.getConnection();
             if (con == null) {
                 System.out.println("Error getting the connection. Please check if the DB server is running");
 
             }
             ps = con.prepareStatement(SELECT_SQL_QUERRY);
-            ps.setInt(1,id);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
-            System.out.println( "retriveCommands => " + ps.toString() );
+            System.out.println("retriveCommands => " + ps.toString());
 
-                cycle.setId(rs.getInt("ID"));
-                cycle.setCycleNumber(rs.getInt("CYCLE_NO"));
-                cycle.setFieldElement(rs.getString("FIELD_ELEMENT").charAt(0));
-                cycle.setPickUp(rs.getString("PICKUP"));
-                cycle.setPlace(rs.getString("PLACE"));
-                cycle.setDefense(rs.getBoolean("DEFENSE"));
-                cycle.setDrop(rs.getBoolean("DROP_BOOL"));
+            cycle.setId(rs.getInt("ID"));
+            cycle.setCycleNumber(rs.getInt("CYCLE_NO"));
+            cycle.setFieldElement(rs.getString("FIELD_ELEMENT").charAt(0));
+            cycle.setPickUp(rs.getString("PICKUP"));
+            cycle.setPlace(rs.getString("PLACE"));
+            cycle.setDefense(rs.getBoolean("DEFENSE"));
+            cycle.setDrop(rs.getBoolean("DROP_BOOL"));
 
 
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             throw e;
-        }
-
-        finally {
-            try
-            {
-                JDBCHelper.closeResultSet( rs );
-                JDBCHelper.closePrepaerdStatement( ps );
-                JDBCHelper.closeConnection( con );
-            }
-            catch ( SQLException e )
-            {
+        } finally {
+            try {
+                JDBCHelper.closeResultSet(rs);
+                JDBCHelper.closePrepaerdStatement(ps);
+                JDBCHelper.closeConnection(con);
+            } catch (SQLException e) {
                 throw e;
             }
         }
         return cycle;
     }
-
 
 
 }
