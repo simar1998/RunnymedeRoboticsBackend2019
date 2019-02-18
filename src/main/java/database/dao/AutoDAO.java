@@ -17,7 +17,7 @@ public class AutoDAO {
     /**
      * The constant INSERT_SQL_QUERRY.
      */
-    public static final String INSERT_SQL_QUERRY = "INSERT INTO AUTO(ID,STRING_POS,PLACE_POS,STARTING_OBJ,TIME_VAL,AUTO_LVL,AUTO_ORDER,AUTO_PRELOAD) VALUES (?,?,?,?,?,?,?,?)";
+    public static final String INSERT_SQL_QUERRY = "INSERT INTO AUTO(ID,STARTING_POS,PLACE_POS,STARTING_OBJ,TIME_VAL,AUTO_LVL,AUTO_ORDER,AUTO_PRELOAD) VALUES (?,?,?,?,?,?,?,?)";
     /**
      * The constant SELECT_SQL_QUERRY.
      */

@@ -248,5 +248,4 @@ public class Cycle {
         return dropoffTime;
     }
 
-
 }

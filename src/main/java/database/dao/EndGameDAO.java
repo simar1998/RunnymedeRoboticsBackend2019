@@ -45,8 +45,8 @@ public class EndGameDAO {
             ps.setBoolean(5,endGame.isRamp());
             ps.setFloat(6,endGame.getTimeToClimb());
             ps.setString(7, endGame.getFailLevel() + "");
-            ps.setTime(8,endGame.getCimbStart());
-            ps.setTime(8,endGame.getClimbEnd());
+            ps.setInt(8,endGame.getCimbStart());
+            ps.setInt(8,endGame.getClimbEnd());
             ps.execute();
             System.out.println("SQL QUERRY ===> " + ps.toString());
             con.commit();
@@ -104,8 +104,8 @@ public class EndGameDAO {
            endGame.setRamp(rs.getBoolean("RAMP"));
            endGame.setTimeToClimb(rs.getFloat("TIME_TO_CLIMB"));
            endGame.setFailLevel(rs.getString("FAIL_LEVEL").charAt(0));
-           endGame.setCimbStart(rs.getTime("CLIMB_START"));
-           endGame.setClimbEnd(rs.getTime("CLIMB_END"));
+           endGame.setCimbStart(rs.getInt("CLIMB_START"));
+           endGame.setClimbEnd(rs.getInt("CLIMB_END"));
 
 
         }

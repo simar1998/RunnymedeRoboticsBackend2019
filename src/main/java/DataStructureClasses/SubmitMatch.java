@@ -1,5 +1,6 @@
 package DataStructureClasses;
 
+import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ public class SubmitMatch {
     Auto auto = new Auto();
     EndGame endGame = new EndGame();
     InitInfo initInfo = new InitInfo();
+    ArrayList<Teleop> teleopsList = new ArrayList<>();
     ArrayList<Cycle> cycleArrayList = new ArrayList<>();
 
     /**
@@ -24,12 +26,14 @@ public class SubmitMatch {
      * @param auto
      * @param endGame
      * @param initInfo
+     * @param teleopsList
      * @param cycleArrayList
      */
-    public SubmitMatch(Auto auto, EndGame endGame, InitInfo initInfo, ArrayList<Cycle> cycleArrayList) {
+    public SubmitMatch(Auto auto, EndGame endGame, InitInfo initInfo, ArrayList<Teleop> teleopsList, ArrayList<Cycle> cycleArrayList) {
         this.auto = auto;
         this.endGame = endGame;
         this.initInfo = initInfo;
+        this.teleopsList = teleopsList;
         this.cycleArrayList = cycleArrayList;
     }
 
