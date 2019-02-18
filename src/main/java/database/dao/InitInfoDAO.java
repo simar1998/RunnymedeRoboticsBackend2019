@@ -16,11 +16,11 @@ public class InitInfoDAO {
     /**
      * The constant INSERT_SQL_QUERRY.
      */
-    public static final String INSERT_SQL_QUERRY = "INSERT INTO INIT_INFO(NAME,MATCH_NO,TEAM_NO,EVENT,YEAR_VAL ) VALUES(?,?,?,?,?)";
+    public static final String INSERT_SQL_QUERRY = "INSERT INTO INIT_INFO(NAME,MATCH_NO,TEAM_NO,EVENT,YEAR_VAL,COLOUR) VALUES(?,?,?,?,?,?)";
     /**
      * The constant SELECT_SQL_QUERRY.
      */
-    public static final String SELECT_SQL_QUERRY = "SELECT ID,MATCH_NO,TEAM_NO,EVENT,YEAR_VAL FROM INIT_INFO WHERE ID = ?";
+    public static final String SELECT_SQL_QUERRY = "SELECT ID,MATCH_NO,TEAM_NO,EVENT,YEAR_VAL,COLOUR FROM INIT_INFO WHERE ID = ?";
 
 
     /**
@@ -52,6 +52,7 @@ public class InitInfoDAO {
                 initInfo.setTeamNumber(rs.getInt("TEAM_NO"));
                 initInfo.setEvent(rs.getString("EVENT"));
                 initInfo.setYear(rs.getInt("YEAR_VAL"));
+                initInfo.setAllianceColour(rs.getString("COLOUR").charAt(0));
 
         }
         catch (SQLException e)
@@ -97,6 +98,8 @@ public class InitInfoDAO {
             ps.setInt(3,initInfo.getTeamNumber());
             ps.setString(4,initInfo.getEvent());
             ps.setInt(5,initInfo.getYear());
+            ps.setString(6,initInfo.getAllianceColour() + "");
+
             ps.execute();
             System.out.println("SQL QUERRY ===> " + ps.toString());
             con.commit();

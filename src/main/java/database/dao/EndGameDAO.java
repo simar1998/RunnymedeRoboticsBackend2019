@@ -15,11 +15,11 @@ public class EndGameDAO {
     /**
      * The constant INSERT_SQL_QUERRY.
      */
-    public static final String INSERT_SQL_QUERRY = "INSERT INTO END_GAME (ID,LEVEL_ONE,LEVEL_TWO,LEVEL_THREE,RAMP,TIME_TO_CLIMB,FAIL_LEVEL) VALUES(?,?,?,?,?,?,?)";
+    public static final String INSERT_SQL_QUERRY = "INSERT INTO END_GAME (ID,LEVEL_ONE,LEVEL_TWO,LEVEL_THREE,RAMP,TIME_TO_CLIMB,FAIL_LEVEL,CLIMB_START,CLIMB_END) VALUES(?,?,?,?,?,?,?,?,?)";
     /**
      * The constant SELECT_SQL_QUERRY.
      */
-    public static final String SELECT_SQL_QUERRY = "SELECT ID,LEVEL_ONE,LEVEL_TWO,LEVEL_THREE,RAMPS,TIME_TO_CLIMB,FAIL_LEVEL FROM END_GAME WHERE ID=?";
+    public static final String SELECT_SQL_QUERRY = "SELECT ID,LEVEL_ONE,LEVEL_TWO,LEVEL_THREE,RAMPS,TIME_TO_CLIMB,FAIL_LEVEL,CLIMB_START,CLIMB_END FROM END_GAME WHERE ID=?";
 
     /**
      * Insert auto sql.
@@ -45,6 +45,8 @@ public class EndGameDAO {
             ps.setBoolean(5,endGame.isRamp());
             ps.setFloat(6,endGame.getTimeToClimb());
             ps.setString(7, endGame.getFailLevel() + "");
+            ps.setTime(8,endGame.getCimbStart());
+            ps.setTime(8,endGame.getClimbEnd());
             ps.execute();
             System.out.println("SQL QUERRY ===> " + ps.toString());
             con.commit();
@@ -102,6 +104,8 @@ public class EndGameDAO {
            endGame.setRamp(rs.getBoolean("RAMP"));
            endGame.setTimeToClimb(rs.getFloat("TIME_TO_CLIMB"));
            endGame.setFailLevel(rs.getString("FAIL_LEVEL").charAt(0));
+           endGame.setCimbStart(rs.getTime("CLIMB_START"));
+           endGame.setClimbEnd(rs.getTime("CLIMB_END"));
 
 
         }

@@ -2,6 +2,14 @@ package DataStructureClasses;
 
 /**
  * The type Init info.
+ *
+ * Initial Info :
+ *      alliance_colour (char)
+ *      Match (3 digit int)
+ *      Team (4 digit int)
+ *      Event (String)
+ *      Year (4 digit int)
+ *
  */
 public class InitInfo {
 
@@ -21,6 +29,10 @@ public class InitInfo {
      * The Team number.
      */
     int teamNumber;
+    /**
+     * The Alliance Colour
+     */
+    char allianceColour;
     /**
      * The Event.
      */
@@ -45,13 +57,14 @@ public class InitInfo {
      * @param event       the event
      * @param year        the year
      */
-    public InitInfo(int id, String name, int matchNumber, int teamNumber, String event, int year) {
+    public InitInfo(int id, String name, int matchNumber, int teamNumber, String event, int year, char allianceColour) {
         this.id = id;
         this.name = name;
         this.matchNumber = matchNumber;
         this.teamNumber = teamNumber;
         this.event = event;
         Year = year;
+        this.allianceColour = allianceColour;
     }
 
     /**
@@ -160,5 +173,23 @@ public class InitInfo {
      */
     public void setYear(int year) {
         Year = year;
+    }
+
+    /**
+     * Gets alliance Colour char
+     * @return
+     */
+    public char getAllianceColour() {
+        return allianceColour;
+    }
+
+    /**
+     * sets alliance colour
+     * @param allianceColour
+     * @return
+     */
+    public InitInfo setAllianceColour(char allianceColour) {
+        this.allianceColour = allianceColour;
+        return this;
     }
 }

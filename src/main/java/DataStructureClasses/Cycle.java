@@ -1,7 +1,16 @@
 package DataStructureClasses;
 
+import java.sql.Time;
 /**
  * The type Cycle.
+ *
+ * * Cycle
+ *  *      game_piece (Char)
+ *  *      Score (bool)
+ *  *      pickup_location (char)
+ *  *      dropoff_location (char)
+ *  *      pickup_time (seconds) (int)
+ *  *      dropoff_time (seconds) (int)
  */
 public class Cycle {
 
@@ -18,11 +27,11 @@ public class Cycle {
      */
     char fieldElement = ' ';
     /**
-     * The Pick up.
+     * The Pick up location.
      */
     String pickUp = "";
     /**
-     * The Place.
+     * The Place location.
      */
     String place = "";
     /**
@@ -34,6 +43,16 @@ public class Cycle {
      */
     boolean drop;
 
+    /**
+     * pickup Timetsamp
+     */
+    Time pickupTime;
+
+    /**
+     * Time stamp for dropoff
+     */
+    Time dropoffTime;
+
 
 
     /**
@@ -43,22 +62,27 @@ public class Cycle {
     }
 
     /**
-     * Instantiates a new Cycle.
-     *
-     * @param fieldElement the field element
-     * @param pickUp       the pick up
-     * @param place        the place
-     * @param defense      the defense
-     * @param drop         the drop
-     * @param cycleNumber  the cycle number
-     * @param id           the id
+     * Constructor for all fields
+     * @param id
+     * @param cycleNumber
+     * @param fieldElement
+     * @param pickUp
+     * @param place
+     * @param defense
+     * @param drop
+     * @param pickupTime
+     * @param dropoffTime
      */
-    public Cycle(char fieldElement, String pickUp, String place, boolean defense, boolean drop, int cycleNumber, int id) {
+    public Cycle(int id, int cycleNumber, char fieldElement, String pickUp, String place, boolean defense, boolean drop, Time pickupTime, Time dropoffTime) {
+        this.id = id;
+        this.cycleNumber = cycleNumber;
         this.fieldElement = fieldElement;
         this.pickUp = pickUp;
         this.place = place;
         this.defense = defense;
         this.drop = drop;
+        this.pickupTime = pickupTime;
+        this.dropoffTime = dropoffTime;
     }
 
     /**
@@ -186,4 +210,43 @@ public class Cycle {
     public void setCycleNumber(int cycleNumber) {
         this.cycleNumber = cycleNumber;
     }
+
+
+    /**
+     * Gets pickupTime.
+     *
+     * @return Value of pickupTime.
+     */
+    public Time getPickupTime() {
+        return pickupTime;
+    }
+
+    /**
+     * Sets new dropoffTime.
+     *
+     * @param dropoffTime New value of dropoffTime.
+     */
+    public void setDropoffTime(Time dropoffTime) {
+        this.dropoffTime = dropoffTime;
+    }
+
+    /**
+     * Sets new pickupTime.
+     *
+     * @param pickupTime New value of pickupTime.
+     */
+    public void setPickupTime(Time pickupTime) {
+        this.pickupTime = pickupTime;
+    }
+
+    /**
+     * Gets dropoffTime.
+     *
+     * @return Value of dropoffTime.
+     */
+    public Time getDropoffTime() {
+        return dropoffTime;
+    }
+
+
 }

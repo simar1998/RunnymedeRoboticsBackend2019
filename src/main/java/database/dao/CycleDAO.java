@@ -1,6 +1,5 @@
 package database.dao;
 
-import DataStructureClasses.Auto;
 import DataStructureClasses.Cycle;
 import database.JDBCHelper;
 
@@ -8,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * The type Cycle dao.
@@ -17,11 +17,11 @@ public class CycleDAO {
     /**
      * The constant INSERT_SQL_QUERRY.
      */
-    public static final String INSERT_SQL_QUERRY = "INSERT INTO CYCLES (ID,CYCLE_NO,FIELD_ELEMENT,PICKUP,PLACE,DEFENSE,DROP_BOOL) VALUES(?,?,?,?,?,?,?)";
+    public static final String INSERT_SQL_QUERRY = "INSERT INTO CYCLES (ID,CYCLE_NO,FIELD_ELEMENT,PICKUP,PLACE,DEFENSE,DROP_BOOL,PICKUP_TIME,DROP_TIME) VALUES(?,?,?,?,?,?,?,?,?)";
     /**
      * The constant SELECT_SQL_QUERRY.
      */
-    public static final String SELECT_SQL_QUERRY = "SELECT ID,CYCLE_NO,FIELD_ELEMENT,PICKUP,PLACE,DEFENSE,DROP_BOOL FROM CYCLES WHERE ID=?";
+    public static final String SELECT_SQL_QUERRY = "SELECT ID,CYCLE_NO,FIELD_ELEMENT,PICKUP,PLACE,DEFENSE,DROP_BOOL,PICKUP_TIME,DROP_TIME FROM CYCLES WHERE ID=?";
 
     /**
      * Insert auto sql.
@@ -47,6 +47,8 @@ public class CycleDAO {
             ps.setString(5, cycle.getPlace());
             ps.setBoolean(6, cycle.isDefense());
             ps.setBoolean(7, cycle.isDrop());
+            ps.setTime(8,cycle.getPickupTime());
+            ps.setTime(9,cycle.getDropoffTime());
             ps.execute();
             System.out.println("SQL QUERRY ===> " + ps.toString());
             con.commit();
@@ -77,11 +79,11 @@ public class CycleDAO {
      * @return the cycle
      * @throws SQLException the sql exception
      */
-    public static Cycle selectCycle(int id) throws SQLException {
+    public static ArrayList<Cycle> selectCycle(int id) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-        Cycle cycle = new Cycle();
+        ArrayList<Cycle> cycleList = new ArrayList<>();
 
         try {
             con = JDBCHelper.getConnection();
@@ -94,14 +96,19 @@ public class CycleDAO {
             rs = ps.executeQuery();
             System.out.println("retriveCommands => " + ps.toString());
 
-            cycle.setId(rs.getInt("ID"));
-            cycle.setCycleNumber(rs.getInt("CYCLE_NO"));
-            cycle.setFieldElement(rs.getString("FIELD_ELEMENT").charAt(0));
-            cycle.setPickUp(rs.getString("PICKUP"));
-            cycle.setPlace(rs.getString("PLACE"));
-            cycle.setDefense(rs.getBoolean("DEFENSE"));
-            cycle.setDrop(rs.getBoolean("DROP_BOOL"));
-
+            while (rs.next()) {
+                Cycle cycle = new Cycle();
+                cycle.setId(rs.getInt("ID"));
+                cycle.setCycleNumber(rs.getInt("CYCLE_NO"));
+                cycle.setFieldElement(rs.getString("FIELD_ELEMENT").charAt(0));
+                cycle.setPickUp(rs.getString("PICKUP"));
+                cycle.setPlace(rs.getString("PLACE"));
+                cycle.setDefense(rs.getBoolean("DEFENSE"));
+                cycle.setDrop(rs.getBoolean("DROP_BOOL"));
+                cycle.setDropoffTime(rs.getTime("DROP_TIME"));
+                cycle.setPickupTime(rs.getTime("PICKUP_TIME"));
+                cycleList.add(cycle);
+            }
 
         } catch (SQLException e) {
             throw e;
@@ -114,7 +121,7 @@ public class CycleDAO {
                 throw e;
             }
         }
-        return cycle;
+        return cycleList;
     }
 
 
