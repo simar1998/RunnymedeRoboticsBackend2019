@@ -10,18 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4c1b72f8-3823-4893-911e-59fcf4bf7ad6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/DataStructureClasses/Teleop.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/database/dao/TeleopDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/DataStructureClasses/QueueWrapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataStructureClasses/Cycle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataStructureClasses/Cycle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/DataStructureClasses/EndGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataStructureClasses/EndGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/DataStructureClasses/SubmitMatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DataStructureClasses/SubmitMatch.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/api/BasicAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/api/BasicAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/dao/AutoDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/dao/AutoDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/dao/CycleDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/dao/CycleDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/dao/EndGameDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/dao/EndGameDAO.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -40,8 +32,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/DataStructureClasses/SubmitMatch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="136" column="7" selection-start-line="136" selection-start-column="5" selection-end-line="136" selection-end-column="7" />
+            <state relative-caret-position="454">
+              <caret line="146" column="75" lean-forward="true" selection-start-line="146" selection-start-column="75" selection-end-line="146" selection-end-column="75" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#937#938#0" expanded="true" />
@@ -50,6 +42,18 @@
                 <element signature="e#1298#1299#0" expanded="true" />
                 <element signature="e#1623#1624#0" expanded="true" />
                 <element signature="e#1660#1661#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/DataStructureClasses/QueueWrapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="488">
+              <caret line="35" column="44" lean-forward="true" selection-start-line="35" selection-start-column="44" selection-end-line="35" selection-end-column="44" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -86,11 +90,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/api/BasicAPI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="178" column="36" lean-forward="true" selection-start-line="178" selection-start-column="36" selection-end-line="178" selection-end-column="36" />
+            <state relative-caret-position="437">
+              <caret line="190" column="24" lean-forward="true" selection-start-line="190" selection-start-column="24" selection-end-line="190" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -117,15 +121,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="12" selection-start-line="20" selection-start-column="12" selection-end-line="20" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web/WEB-INF/web.xml">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
@@ -142,8 +137,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/database/dao/InitInfoDAO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="88" column="13" lean-forward="true" selection-start-line="85" selection-end-line="128" selection-end-column="5" />
+            <state relative-caret-position="219">
+              <caret line="85" column="22" selection-start-line="85" selection-start-column="22" selection-end-line="85" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -192,8 +187,9 @@
         <option value="$PROJECT_DIR$/src/main/java/database/dao/AutoDAO.java" />
         <option value="$PROJECT_DIR$/src/main/java/DataStructureClasses/Teleop.java" />
         <option value="$PROJECT_DIR$/src/main/java/database/dao/TeleopDAO.java" />
-        <option value="$PROJECT_DIR$/src/main/java/DataStructureClasses/SubmitMatch.java" />
+        <option value="$PROJECT_DIR$/src/main/java/DataStructureClasses/QueueWrapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/api/BasicAPI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/DataStructureClasses/SubmitMatch.java" />
       </list>
     </option>
   </component>
@@ -256,23 +252,6 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RunnymedeRoboticsBackend2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RunnymedeRoboticsBackend2019" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="RunnymedeRoboticsBackend2019" type="b2602c69:ProjectViewProjectNode" />
-              <item name="RunnymedeRoboticsBackend2019" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="database" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="RunnymedeRoboticsBackend2019" type="b2602c69:ProjectViewProjectNode" />
@@ -381,7 +360,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550526392360" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550531892973" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -399,6 +378,7 @@
       <recent name="database" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Simar\IdeaProjects\RunnymedeRoboticsBackend2019\src\main\java\DataStructureClasses" />
       <recent name="C:\Users\Simar\Documents\GitHub\RunnymedeRoboticsBackend2019\web\WEB-INF\lib" />
     </key>
   </component>
@@ -506,7 +486,7 @@
       <workItem from="1550453893716" duration="8070000" />
       <workItem from="1550508368541" duration="356000" />
       <workItem from="1550508852326" duration="1464000" />
-      <workItem from="1550510393531" duration="10398000" />
+      <workItem from="1550510393531" duration="13883000" />
     </task>
     <task id="LOCAL-00001" summary="FIRST COMMIT">
       <created>1550091028042</created>
@@ -522,11 +502,25 @@
       <option name="project" value="LOCAL" />
       <updated>1550511375338</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Added teleop class and its approtpriate implempation in the api and created its Data acess object">
+      <created>1550526462823</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1550526462823</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added teleop class and its approtpriate implempation in the api and created its Data acess object">
+      <created>1550526483781</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1550526483781</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="43272000" />
+    <option name="totallyTimeSpent" value="46757000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -606,7 +600,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="FIRST COMMIT" />
     <MESSAGE value="Chnged to new db schmea" />
-    <option name="LAST_COMMIT_MESSAGE" value="Chnged to new db schmea" />
+    <MESSAGE value="Added teleop class and its approtpriate implempation in the api and created its Data acess object" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added teleop class and its approtpriate implempation in the api and created its Data acess object" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/database/dao/InterfaceDAO.java" />
@@ -772,10 +767,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/database/dao/TeleopDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="89" column="24" lean-forward="true" selection-start-line="89" selection-start-column="24" selection-end-line="89" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Added_teleop_class_and_its_approtpriate_implempation_in_the_api_and_created_its_Data_acess.patch">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/database/dao/InitInfoDAO.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="88" column="13" lean-forward="true" selection-start-line="85" selection-end-line="128" selection-end-column="5" />
+        <state relative-caret-position="219">
+          <caret line="85" column="22" selection-start-line="85" selection-start-column="22" selection-end-line="85" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -784,8 +792,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/DataStructureClasses/SubmitMatch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="136" column="7" selection-start-line="136" selection-start-column="5" selection-end-line="136" selection-end-column="7" />
+        <state relative-caret-position="454">
+          <caret line="146" column="75" lean-forward="true" selection-start-line="146" selection-start-column="75" selection-end-line="146" selection-end-column="75" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#937#938#0" expanded="true" />
@@ -798,20 +806,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/database/dao/TeleopDAO.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/api/BasicAPI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="89" column="24" lean-forward="true" selection-start-line="89" selection-start-column="24" selection-end-line="89" selection-end-column="24" />
+        <state relative-caret-position="437">
+          <caret line="190" column="24" lean-forward="true" selection-start-line="190" selection-start-column="24" selection-end-line="190" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/api/BasicAPI.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/DataStructureClasses/QueueWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="178" column="36" lean-forward="true" selection-start-line="178" selection-start-column="36" selection-end-line="178" selection-end-column="36" />
+        <state relative-caret-position="488">
+          <caret line="35" column="44" lean-forward="true" selection-start-line="35" selection-start-column="44" selection-end-line="35" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

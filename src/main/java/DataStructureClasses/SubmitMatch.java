@@ -137,12 +137,15 @@ public class SubmitMatch {
      */
     public void insertSQL(){
         try {
+            int id = database.dao.InitInfoDAO.insertInitInfoSQL(initInfo);
+            auto.setId(id);
+            endGame.setId(id);
             database.dao.AutoDAO.insertAutoSQL(auto);
             database.dao.EndGameDAO.insertAutoSQL(endGame);
-            for (Cycle i: cycleArrayList){
-                database.dao.CycleDAO.insertAutoSQL(i);
+            for (int i = 0; i < cycleArrayList.size(); i++){
+                cycleArrayList.get(i).setId(id);
+                database.dao.CycleDAO.insertAutoSQL(cycleArrayList.get(i));
             }
-            database.dao.InitInfoDAO.insertInitInfoSQL(initInfo);
         }
         catch (SQLException e){
             e.printStackTrace();

@@ -182,5 +182,16 @@ public class BasicAPI {
         submitMatch.insertSQL();
     }
 
+    @POST
+    @Path("/addQueueWrapper")
+    @Produces("text/plain")
+    @Consumes("application/x-xxx-form-urlencoded")
+    public void submitQueue(@QueryParam("queue") String queue){
+        QueueWrapper queueWrapper = gson.fromJson(queue, QueueWrapper.class);
+        queueWrapper.insertSQL();
+    }
+
+
+
 
 }
