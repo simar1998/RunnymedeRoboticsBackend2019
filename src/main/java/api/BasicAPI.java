@@ -29,7 +29,7 @@ public class BasicAPI {
     @Consumes("application/x-xxx-form-urlencoded")
     public String getInitInfo(@QueryParam("id") int id){
         try {
-           return gson.toJson(database.dao.InitInfoDAO.selectInitInfo(id));
+           return gson.toJson(database.dao.InitInfoDAO.selectInitInfo(id,false));
         }
        catch (SQLException e){
             return e.toString();
@@ -48,7 +48,7 @@ public class BasicAPI {
     @Consumes("application/x-xxx-form-urlencoded")
     public String postInitInfo(@FormParam("initInfo") String initInfo){
         try {
-            database.dao.InitInfoDAO.insertInitInfoSQL(gson.fromJson(initInfo, InitInfo.class));
+            database.dao.InitInfoDAO.insertInitInfoSQL(gson.fromJson(initInfo, InitInfo.class),false);
             return "API CALL COMPLETE";
         }
         catch (SQLException e){
@@ -68,7 +68,7 @@ public class BasicAPI {
     @Consumes("application/x-xxx-form-urlencoded")
     public String getCycleFromDatabase(@QueryParam("id") int id){
         try {
-            return gson.toJson(database.dao.CycleDAO.selectCycle(id));
+            return gson.toJson(database.dao.CycleDAO.selectCycle(id,false));
         }
         catch (SQLException e){
             return e.toString();
@@ -87,7 +87,7 @@ public class BasicAPI {
     @Consumes("application/x-xxx-form-urlencoded")
     public String insertCycleData(@FormParam("cycle") String cycleString){
         try {
-            database.dao.CycleDAO.insertAutoSQL(gson.fromJson(cycleString, Cycle.class));
+            database.dao.CycleDAO.insertAutoSQL(gson.fromJson(cycleString, Cycle.class),false);
             return "API CALL COMPLETE";
         }
         catch (SQLException e){
@@ -107,7 +107,7 @@ public class BasicAPI {
     @Consumes("application/x-xxx-form-urlencoded")
     public String getEndGameFromDatabase(@QueryParam("id") int id){
         try {
-            return gson.toJson(database.dao.EndGameDAO.selectEndgame(id));
+            return gson.toJson(database.dao.EndGameDAO.selectEndgame(id,false));
         }
         catch (SQLException e){
             return e.toString();
@@ -126,7 +126,7 @@ public class BasicAPI {
     @Consumes("application/x-xxx-form-urlencoded")
     public String postEndgame(@FormParam("endGame") String endGame){
         try {
-            database.dao.EndGameDAO.insertAutoSQL(gson.fromJson(endGame,EndGame.class));
+            database.dao.EndGameDAO.insertAutoSQL(gson.fromJson(endGame,EndGame.class),false);
             return "API CALL COMPLETE";
         }
         catch (SQLException e){
@@ -146,7 +146,7 @@ public class BasicAPI {
     @Consumes("application/x-xxx-form-urlencoded")
     public String getAuto(@QueryParam("id") int id){
         try {
-            return gson.toJson(database.dao.AutoDAO.selectAuto(id));
+            return gson.toJson(database.dao.AutoDAO.selectAuto(id,false));
         }
         catch (SQLException e){
             return e.toString();
@@ -165,7 +165,7 @@ public class BasicAPI {
     @Consumes("application/x-xxx-form-urlencoded")
     public String postAuto(@FormParam("auto") String auto){
         try {
-            database.dao.AutoDAO.insertAutoSQL(gson.fromJson(auto, Auto.class));
+            database.dao.AutoDAO.insertAutoSQL(gson.fromJson(auto, Auto.class), false);
             return "API CALL COMPLETE";
         }
         catch (SQLException e){
@@ -179,7 +179,7 @@ public class BasicAPI {
     @Consumes("application/x-xxx-form-urlencoded")
     public void submitInfo(@QueryParam("info") String submitInfo){
         SubmitMatch submitMatch = gson.fromJson(submitInfo, SubmitMatch.class);
-        submitMatch.insertSQL();
+        submitMatch.insertSQL(false);
     }
 
     @POST

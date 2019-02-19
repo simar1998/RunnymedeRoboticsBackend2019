@@ -29,12 +29,19 @@ public class AutoDAO {
      * @param auto the auto
      * @throws SQLException the sql exception
      */
-    public static void insertAutoSQL(Auto auto) throws SQLException{
+    public static void insertAutoSQL(Auto auto, boolean cloud) throws SQLException{
         Connection con = null;
         PreparedStatement ps = null;
-
+        JDBCHelper jdbcHelper = null;
         try {
-            con = JDBCHelper.getConnection();
+            if(cloud){
+                jdbcHelper = new JDBCHelper(true);
+                con = jdbcHelper.getConnection();
+            }
+            else {
+                jdbcHelper = new JDBCHelper(false);
+                con = jdbcHelper.getConnection();
+            }
             if (con == null) {
                 System.out.println("Error getting the connection. Please check if the DB server is running");
                 return;
@@ -64,8 +71,8 @@ public class AutoDAO {
         }
         finally {
             try {
-                JDBCHelper.closePrepaerdStatement(ps);
-                JDBCHelper.closeConnection(con);
+                jdbcHelper.closePrepaerdStatement(ps);
+                jdbcHelper.closeConnection(con);
             } catch (SQLException e) {
                 throw e;
             }
@@ -79,19 +86,26 @@ public class AutoDAO {
      * @return the auto
      * @throws SQLException the sql exception
      */
-    public static Auto selectAuto(int id) throws SQLException{
+    public static Auto selectAuto(int id, boolean cloud) throws SQLException{
         Connection con = null;
         PreparedStatement ps= null;
         ResultSet rs = null;
         Auto auto = new Auto();
+        JDBCHelper jdbcHelper = null;
 
-        try
-        {
-            con = JDBCHelper.getConnection();
-            if (con == null) {
-                System.out.println("Error getting the connection. Please check if the DB server is running");
-
-            }
+            try {
+                if(cloud){
+                    jdbcHelper = new JDBCHelper(true);
+                    con = jdbcHelper.getConnection();
+                }
+                else {
+                    jdbcHelper = new JDBCHelper(false);
+                    con = jdbcHelper.getConnection();
+                }
+                if (con == null) {
+                    System.out.println("Error getting the connection. Please check if the DB server is running");
+                    return new Auto();
+                }
             ps = con.prepareStatement(SELECT_SQL_QUERRY);
             ps.setInt(1,id);
             rs = ps.executeQuery();
@@ -117,9 +131,9 @@ public class AutoDAO {
         finally {
             try
             {
-                JDBCHelper.closeResultSet( rs );
-                JDBCHelper.closePrepaerdStatement( ps );
-                JDBCHelper.closeConnection( con );
+                jdbcHelper.closeResultSet( rs );
+                jdbcHelper.closePrepaerdStatement( ps );
+                jdbcHelper.closeConnection( con );
             }
             catch ( SQLException e )
             {

@@ -1,6 +1,5 @@
 package DataStructureClasses;
 
-import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -52,7 +51,7 @@ public class SubmitMatch {
      */
     public void setAuto(Auto auto) throws SQLException {
         try {
-            database.dao.AutoDAO.insertAutoSQL(auto);
+            database.dao.AutoDAO.insertAutoSQL(auto,false);
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -76,7 +75,7 @@ public class SubmitMatch {
      */
     public void setEndGame(EndGame endGame) throws SQLException{
         try {
-            database.dao.EndGameDAO.insertAutoSQL(endGame);
+            database.dao.EndGameDAO.insertAutoSQL(endGame, false);
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -99,7 +98,7 @@ public class SubmitMatch {
      */
     public void setInitInfo(InitInfo initInfo) throws SQLException{
         try {
-            database.dao.InitInfoDAO.insertInitInfoSQL(initInfo);
+            database.dao.InitInfoDAO.insertInitInfoSQL(initInfo, false);
         }
         catch (SQLException e){
             e.printStackTrace();
@@ -123,7 +122,7 @@ public class SubmitMatch {
     public void setCycleArrayList(ArrayList<Cycle> cycleArrayList) throws SQLException{
         try {
            for (Cycle i: cycleArrayList){
-               database.dao.CycleDAO.insertAutoSQL(i);
+               database.dao.CycleDAO.insertAutoSQL(i, false);
            }
         }
         catch (SQLException e){
@@ -135,16 +134,16 @@ public class SubmitMatch {
     /**
      * Inserts all the sql data
      */
-    public void insertSQL(){
+    public void insertSQL(boolean cloud){
         try {
-            int id = database.dao.InitInfoDAO.insertInitInfoSQL(initInfo);
+            int id = database.dao.InitInfoDAO.insertInitInfoSQL(initInfo,cloud);
             auto.setId(id);
             endGame.setId(id);
-            database.dao.AutoDAO.insertAutoSQL(auto);
-            database.dao.EndGameDAO.insertAutoSQL(endGame);
+            database.dao.AutoDAO.insertAutoSQL(auto,false);
+            database.dao.EndGameDAO.insertAutoSQL(endGame,false);
             for (int i = 0; i < cycleArrayList.size(); i++){
                 cycleArrayList.get(i).setId(id);
-                database.dao.CycleDAO.insertAutoSQL(cycleArrayList.get(i));
+                database.dao.CycleDAO.insertAutoSQL(cycleArrayList.get(i),false);
             }
         }
         catch (SQLException e){
@@ -152,4 +151,21 @@ public class SubmitMatch {
         }
     }
 
+    /**
+     * Gets teleopsList.
+     *
+     * @return Value of teleopsList.
+     */
+    public ArrayList<Teleop> getTeleopsList() {
+        return teleopsList;
+    }
+
+    /**
+     * Sets new teleopsList.
+     *
+     * @param teleopsList New value of teleopsList.
+     */
+    public void setTeleopsList(ArrayList<Teleop> teleopsList) {
+        this.teleopsList = teleopsList;
+    }
 }

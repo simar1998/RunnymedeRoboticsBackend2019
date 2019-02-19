@@ -9,13 +9,53 @@ import java.sql.*;
  */
 public class JDBCHelper
 {
-   private static Connection connection;
 
-   static
-   {
+   final String DRIVER_NAME = "com.mysql.jdbc.Driver";
+   /**
+    * The constant URL.
+    */
+  final String URL         = "jdbc:mysql://localhost:3306/dbName";
+   /**
+    * The constant USERNAME.
+    */
+   final String USERNAME    = "root";
+   /**
+    * The constant PASSWORD.
+    */
+   final String PASSWORD    = "";
+
+   /**
+    * The constant DRIVER_NAME FOR CLOUD SERVER.
+    */
+   final String DRIVER_NAME_CLOUD = "com.mysql.jdbc.Driver";
+   /**
+    * The constant URL.
+    */
+   final String URL_CLOUD         = "jdbc:mysql://localhost:3306/dbName";
+   /**
+    * The constant USERNAME.
+    */
+   final String USERNAME_CLOUD    = "root";
+   /**
+    * The constant PASSWORD.
+    */
+   final String PASSWORD_CLOUD    = "";
+
+
+   private Connection connection;
+
+   boolean isConnectionCloud = false;
+
+   public JDBCHelper( Boolean isConnectionCloud) {
       try
       {
-         Class.forName( JDBCConstants.DRIVER_NAME );
+          this.isConnectionCloud = isConnectionCloud;
+         if(isConnectionCloud) {
+            Class.forName(DRIVER_NAME_CLOUD);
+         }
+         else {
+            Class.forName(DRIVER_NAME);
+         }
       }
       catch ( ClassNotFoundException e )
       {
@@ -23,13 +63,19 @@ public class JDBCHelper
       }
    }
 
+
    /**
     * Load driver.
     */
-   public static void loadDriver(){
+   public  void loadDriver(){
       try
       {
-         Class.forName( JDBCConstants.DRIVER_NAME );
+         if(isConnectionCloud) {
+            Class.forName(DRIVER_NAME_CLOUD);
+         }
+         else {
+            Class.forName(DRIVER_NAME);
+         }
       }
       catch ( ClassNotFoundException e )
       {
@@ -43,9 +89,15 @@ public class JDBCHelper
     * @return the connection
     * @throws SQLException the sql exception
     */
-   public static Connection getConnection() throws SQLException
+   public Connection getConnection() throws SQLException
    {
-      connection = DriverManager.getConnection( JDBCConstants.URL, JDBCConstants.USERNAME, JDBCConstants.PASSWORD );
+      if(isConnectionCloud) {
+         connection = DriverManager.getConnection( URL_CLOUD, USERNAME_CLOUD, PASSWORD_CLOUD );
+      }
+      else {
+
+      }
+      connection = DriverManager.getConnection( URL, USERNAME, PASSWORD );
       return connection;
    }
 
@@ -55,7 +107,7 @@ public class JDBCHelper
     * @param con the con
     * @throws SQLException the sql exception
     */
-   public static void closeConnection( Connection con ) throws SQLException
+   public void closeConnection( Connection con ) throws SQLException
    {
       if ( con != null )
       {
@@ -69,7 +121,7 @@ public class JDBCHelper
     * @param stmt the stmt
     * @throws SQLException the sql exception
     */
-   public static void closePrepaerdStatement( PreparedStatement stmt ) throws SQLException
+   public void closePrepaerdStatement( PreparedStatement stmt ) throws SQLException
    {
       if ( stmt != null )
       {
@@ -83,7 +135,7 @@ public class JDBCHelper
     * @param rs the rs
     * @throws SQLException the sql exception
     */
-   public static void closeResultSet( ResultSet rs ) throws SQLException
+   public void closeResultSet( ResultSet rs ) throws SQLException
    {
       if ( rs != null )
       {
@@ -91,4 +143,22 @@ public class JDBCHelper
       }
    }
 
+
+   /**
+    * Gets isConnectionCloud.
+    *
+    * @return Value of isConnectionCloud.
+    */
+   public boolean isIsConnectionCloud() {
+      return isConnectionCloud;
+   }
+
+   /**
+    * Sets new isConnectionCloud.
+    *
+    * @param isConnectionCloud New value of isConnectionCloud.
+    */
+   public void setIsConnectionCloud(boolean isConnectionCloud) {
+      this.isConnectionCloud = isConnectionCloud;
+   }
 }

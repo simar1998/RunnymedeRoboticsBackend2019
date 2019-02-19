@@ -12,15 +12,23 @@ public class TeleopDAO {
     public static final String INSERT_SQL_QUERRY = "INSERT INTO TELEOP (ID,TIME_CROSSED) VALUES(?,?)";
     public static final String SELECT_SQL_QUERRY = "SELECT TIME_CROSSED FROM TELEOP WHERE ID=?";
 
-    public static ArrayList<Teleop> selectInitInfo(int id) throws SQLException {
+    public static ArrayList<Teleop> selectInitInfo(int id, boolean cloud) throws SQLException {
         Connection con = null;
         PreparedStatement ps= null;
         ResultSet rs = null;
         ArrayList<Teleop> teleopList = new ArrayList<>();
+        JDBCHelper jdbcHelper = null;
 
         try
         {
-            con = JDBCHelper.getConnection();
+            if(cloud){
+                jdbcHelper = new JDBCHelper(true);
+                con = jdbcHelper.getConnection();
+            }
+            else {
+                jdbcHelper = new JDBCHelper(false);
+                con = jdbcHelper.getConnection();
+            }
             if (con == null) {
                 System.out.println("Error getting the connection. Please check if the DB server is running");
 
@@ -45,9 +53,9 @@ public class TeleopDAO {
         finally {
             try
             {
-                JDBCHelper.closeResultSet( rs );
-                JDBCHelper.closePrepaerdStatement( ps );
-                JDBCHelper.closeConnection( con );
+                jdbcHelper.closeResultSet( rs );
+                jdbcHelper.closePrepaerdStatement( ps );
+                jdbcHelper.closeConnection( con );
             }
             catch ( SQLException e )
             {
@@ -57,11 +65,19 @@ public class TeleopDAO {
         return teleopList;
     }
 
-    public static Teleop insertInitInfoSQL(Teleop teleop) throws SQLException {
+    public static Teleop insertInitInfoSQL(Teleop teleop, boolean cloud) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
+        JDBCHelper jdbcHelper = null;
         try {
-            con = JDBCHelper.getConnection();
+            if(cloud){
+                jdbcHelper = new JDBCHelper(true);
+                con = jdbcHelper.getConnection();
+            }
+            else {
+                jdbcHelper = new JDBCHelper(false);
+                con = jdbcHelper.getConnection();
+            }
             if (con == null) {
                 System.out.println("Error getting the connection. Please check if the DB server is running");
                 return new Teleop();
@@ -84,16 +100,13 @@ public class TeleopDAO {
         }
         finally {
             try {
-                JDBCHelper.closePrepaerdStatement(ps);
-                JDBCHelper.closeConnection(con);
+                jdbcHelper.closePrepaerdStatement(ps);
+                jdbcHelper.closeConnection(con);
             } catch (SQLException e) {
                 throw e;
             }
         }
-        ps = con.prepareStatement("SELECT MAX(ID) FROM INIT_INFO");
-        ResultSet rs = ps.executeQuery();
         return  teleop;
-
     }
 
 

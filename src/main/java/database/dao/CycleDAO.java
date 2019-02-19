@@ -29,12 +29,19 @@ public class CycleDAO {
      * @param cycle the cycle
      * @throws SQLException the sql exception
      */
-    public static void insertAutoSQL(Cycle cycle) throws SQLException {
+    public static void insertAutoSQL(Cycle cycle, boolean cloud) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
-
+        JDBCHelper jdbcHelper = null;
         try {
-            con = JDBCHelper.getConnection();
+            if(cloud){
+                jdbcHelper = new JDBCHelper(true);
+                con = jdbcHelper.getConnection();
+            }
+            else {
+                jdbcHelper = new JDBCHelper(false);
+                con = jdbcHelper.getConnection();
+            }
             if (con == null) {
                 System.out.println("Error getting the connection. Please check if the DB server is running");
                 return;
@@ -63,8 +70,8 @@ public class CycleDAO {
             throw e;
         } finally {
             try {
-                JDBCHelper.closePrepaerdStatement(ps);
-                JDBCHelper.closeConnection(con);
+                jdbcHelper.closePrepaerdStatement(ps);
+                jdbcHelper.closeConnection(con);
             } catch (SQLException e) {
                 throw e;
             }
@@ -79,14 +86,22 @@ public class CycleDAO {
      * @return the cycle
      * @throws SQLException the sql exception
      */
-    public static ArrayList<Cycle> selectCycle(int id) throws SQLException {
+    public static ArrayList<Cycle> selectCycle(int id,Boolean cloud) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         ArrayList<Cycle> cycleList = new ArrayList<>();
+        JDBCHelper jdbcHelper = null;
 
         try {
-            con = JDBCHelper.getConnection();
+            if(cloud){
+                jdbcHelper = new JDBCHelper(true);
+                con = jdbcHelper.getConnection();
+            }
+            else {
+                jdbcHelper = new JDBCHelper(false);
+                con = jdbcHelper.getConnection();
+            }
             if (con == null) {
                 System.out.println("Error getting the connection. Please check if the DB server is running");
 
@@ -114,9 +129,9 @@ public class CycleDAO {
             throw e;
         } finally {
             try {
-                JDBCHelper.closeResultSet(rs);
-                JDBCHelper.closePrepaerdStatement(ps);
-                JDBCHelper.closeConnection(con);
+                jdbcHelper.closeResultSet(rs);
+                jdbcHelper.closePrepaerdStatement(ps);
+                jdbcHelper.closeConnection(con);
             } catch (SQLException e) {
                 throw e;
             }

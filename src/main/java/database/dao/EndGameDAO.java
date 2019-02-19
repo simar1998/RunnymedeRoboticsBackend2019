@@ -27,12 +27,19 @@ public class EndGameDAO {
      * @param endGame the end game
      * @throws SQLException the sql exception
      */
-    public static void insertAutoSQL(EndGame endGame) throws SQLException {
+    public static void insertAutoSQL(EndGame endGame, Boolean cloud) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
-
+        JDBCHelper jdbcHelper = null;
         try {
-            con = JDBCHelper.getConnection();
+            if(cloud){
+                jdbcHelper = new JDBCHelper(true);
+                con = jdbcHelper.getConnection();
+            }
+            else {
+                jdbcHelper = new JDBCHelper(false);
+                con = jdbcHelper.getConnection();
+            }
             if (con == null) {
                 System.out.println("Error getting the connection. Please check if the DB server is running");
                 return;
@@ -63,8 +70,8 @@ public class EndGameDAO {
         }
         finally {
             try {
-                JDBCHelper.closePrepaerdStatement(ps);
-                JDBCHelper.closeConnection(con);
+                jdbcHelper.closePrepaerdStatement(ps);
+                jdbcHelper.closeConnection(con);
             } catch (SQLException e) {
                 throw e;
             }
@@ -79,15 +86,22 @@ public class EndGameDAO {
      * @return the cycle
      * @throws SQLException the sql exception
      */
-    public static EndGame selectEndgame(int id) throws SQLException{
+    public static EndGame selectEndgame(int id, boolean cloud) throws SQLException{
         Connection con = null;
         PreparedStatement ps= null;
         ResultSet rs = null;
         EndGame endGame = new EndGame();
-
+        JDBCHelper jdbcHelper = null;
         try
         {
-            con = JDBCHelper.getConnection();
+            if(cloud){
+                jdbcHelper = new JDBCHelper(true);
+                con = jdbcHelper.getConnection();
+            }
+            else {
+                jdbcHelper = new JDBCHelper(false);
+                con = jdbcHelper.getConnection();
+            }
             if (con == null) {
                 System.out.println("Error getting the connection. Please check if the DB server is running");
 
@@ -117,9 +131,9 @@ public class EndGameDAO {
         finally {
             try
             {
-                JDBCHelper.closeResultSet( rs );
-                JDBCHelper.closePrepaerdStatement( ps );
-                JDBCHelper.closeConnection( con );
+                jdbcHelper.closeResultSet( rs );
+                jdbcHelper.closePrepaerdStatement( ps );
+                jdbcHelper.closeConnection( con );
             }
             catch ( SQLException e )
             {
