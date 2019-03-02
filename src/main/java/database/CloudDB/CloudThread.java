@@ -11,7 +11,7 @@ public class CloudThread extends Thread {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                CloudDAO.checkCloudPresistantce();
+               // CloudDAO.checkCloudPresistantce();
             }
         }, 1*60*1000);
     }

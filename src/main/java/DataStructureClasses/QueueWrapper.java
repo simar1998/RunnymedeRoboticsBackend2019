@@ -33,7 +33,7 @@ public class QueueWrapper {
     public void insertSQL(){
         Iterator<SubmitMatch> submitMatchIterator = submitMatchArrayList.iterator();
         while (submitMatchIterator.hasNext()){
-            submitMatchIterator.next().insertSQL();
+            submitMatchIterator.next().insertSQL(false);
         }
     }
 }

@@ -26,7 +26,7 @@ public class BasicAPI {
     @GET
     @Path("/initInfo")
     @Produces("text/plain")
-    @Consumes("application/x-xxx-form-urlencoded")
+    @Consumes("application/x-www-form-urlencoded")
     public String getInitInfo(@QueryParam("id") int id){
         try {
            return gson.toJson(database.dao.InitInfoDAO.selectInitInfo(id,false));
@@ -43,9 +43,9 @@ public class BasicAPI {
      * @return the string
      */
     @POST
-    @Path("/intiInfo")
+    @Path("/initInfo")
     @Produces("text/plain")
-    @Consumes("application/x-xxx-form-urlencoded")
+    @Consumes("application/x-www-form-urlencoded")
     public String postInitInfo(@FormParam("initInfo") String initInfo){
         try {
             database.dao.InitInfoDAO.insertInitInfoSQL(gson.fromJson(initInfo, InitInfo.class),false);
@@ -65,7 +65,7 @@ public class BasicAPI {
     @GET
     @Path("/cycle")
     @Produces("text/plain")
-    @Consumes("application/x-xxx-form-urlencoded")
+    @Consumes("application/x-www-form-urlencoded")
     public String getCycleFromDatabase(@QueryParam("id") int id){
         try {
             return gson.toJson(database.dao.CycleDAO.selectCycle(id,false));
@@ -84,7 +84,7 @@ public class BasicAPI {
     @POST
     @Path("/addCycle")
     @Produces("text/plain")
-    @Consumes("application/x-xxx-form-urlencoded")
+    @Consumes("application/x-www-form-urlencoded")
     public String insertCycleData(@FormParam("cycle") String cycleString){
         try {
             database.dao.CycleDAO.insertAutoSQL(gson.fromJson(cycleString, Cycle.class),false);
@@ -104,7 +104,7 @@ public class BasicAPI {
     @GET
     @Path("/endGame")
     @Produces("text/plain")
-    @Consumes("application/x-xxx-form-urlencoded")
+    @Consumes("application/x-www-form-urlencoded")
     public String getEndGameFromDatabase(@QueryParam("id") int id){
         try {
             return gson.toJson(database.dao.EndGameDAO.selectEndgame(id,false));
@@ -123,7 +123,7 @@ public class BasicAPI {
     @POST
     @Path("/endGame")
     @Produces("text/plain")
-    @Consumes("application/x-xxx-form-urlencoded")
+    @Consumes("application/x-www-form-urlencoded")
     public String postEndgame(@FormParam("endGame") String endGame){
         try {
             database.dao.EndGameDAO.insertAutoSQL(gson.fromJson(endGame,EndGame.class),false);
@@ -143,7 +143,7 @@ public class BasicAPI {
     @GET
     @Path("/auto")
     @Produces("text/plain")
-    @Consumes("application/x-xxx-form-urlencoded")
+    @Consumes("application/x-www-form-urlencoded")
     public String getAuto(@QueryParam("id") int id){
         try {
             return gson.toJson(database.dao.AutoDAO.selectAuto(id,false));
@@ -162,7 +162,7 @@ public class BasicAPI {
     @POST
     @Path("/auto")
     @Produces("text/plain")
-    @Consumes("application/x-xxx-form-urlencoded")
+    @Consumes("application/x-www-form-urlencoded")
     public String postAuto(@FormParam("auto") String auto){
         try {
             database.dao.AutoDAO.insertAutoSQL(gson.fromJson(auto, Auto.class), false);
@@ -176,7 +176,7 @@ public class BasicAPI {
     @POST
     @Path("/matchInfo")
     @Produces("text/plain")
-    @Consumes("application/x-xxx-form-urlencoded")
+    @Consumes("application/x-www-form-urlencoded")
     public void submitInfo(@QueryParam("info") String submitInfo){
         SubmitMatch submitMatch = gson.fromJson(submitInfo, SubmitMatch.class);
         submitMatch.insertSQL(false);
@@ -185,7 +185,7 @@ public class BasicAPI {
     @POST
     @Path("/addQueueWrapper")
     @Produces("text/plain")
-    @Consumes("application/x-xxx-form-urlencoded")
+    @Consumes("application/x-www-form-urlencoded")
     public void submitQueue(@QueryParam("queue") String queue){
         QueueWrapper queueWrapper = gson.fromJson(queue, QueueWrapper.class);
         queueWrapper.insertSQL();

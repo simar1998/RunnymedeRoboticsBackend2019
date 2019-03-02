@@ -13,9 +13,9 @@ public class CloudDAO {
 
     public static final String GET_MAX_ID = "SELECT MAX(ID) FROM INIT_INFO";
 
-    public static int getMaxIdCloud(boolean cloud) throws SQLException {
+    public static int getMaxIdCloud(boolean cloud) {
         try {
-
+        int id = 0;
             Connection con = null;
             PreparedStatement ps = null;
             ResultSet rs = null;
@@ -23,7 +23,12 @@ public class CloudDAO {
             con = jdbcHelper.getConnection();
             ps = con.prepareStatement(GET_MAX_ID);
             rs = ps.executeQuery();
-            return rs.getInt("ID");
+            System.out.println(rs.toString());
+            while (rs.next()){
+                id = rs.getInt(1);
+            }
+
+            return id;
         }
         catch (SQLException e){
             e.printStackTrace();

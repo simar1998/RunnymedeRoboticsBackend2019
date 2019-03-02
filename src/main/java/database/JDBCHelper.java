@@ -14,7 +14,7 @@ public class JDBCHelper
    /**
     * The constant URL.
     */
-  final String URL         = "jdbc:mysql://localhost:3306/dbName";
+  final String URL         = "jdbc:mysql://localhost:3306/robotics";
    /**
     * The constant USERNAME.
     */
@@ -31,7 +31,7 @@ public class JDBCHelper
    /**
     * The constant URL.
     */
-   final String URL_CLOUD         = "jdbc:mysql://localhost:3306/dbName";
+   final String URL_CLOUD         = "jdbc:mysql://localhost:3306/robotics";
    /**
     * The constant USERNAME.
     */

@@ -1,6 +1,7 @@
 package database.dao;
 
 import DataStructureClasses.InitInfo;
+import database.CloudDB.CloudDAO;
 import database.JDBCHelper;
 
 import java.sql.Connection;
@@ -116,6 +117,7 @@ public class InitInfoDAO {
             ps.setString(6,initInfo.getAllianceColour() + "");
 
             ps.execute();
+            con.setAutoCommit(false);
             System.out.println("SQL QUERRY ===> " + ps.toString());
             con.commit();
         }
@@ -137,9 +139,11 @@ public class InitInfoDAO {
                 throw e;
             }
         }
-            ps = con.prepareStatement("SELECT MAX(ID) FROM INIT_INFO");
-        ResultSet rs = ps.executeQuery();
-        return  rs.getInt("id");
+        int maxID = CloudDAO.getMaxIdCloud(cloud);
+        System.out.println(maxID);
+        return maxID;
 
     }
+
+
 }

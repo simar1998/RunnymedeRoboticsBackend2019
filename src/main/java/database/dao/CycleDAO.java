@@ -54,8 +54,8 @@ public class CycleDAO {
             ps.setString(5, cycle.getPlace());
             ps.setBoolean(6, cycle.isDefense());
             ps.setBoolean(7, cycle.isDrop());
-            ps.setTime(8,cycle.getPickupTime());
-            ps.setTime(9,cycle.getDropoffTime());
+            ps.setInt(8,cycle.getPickupTime());
+            ps.setInt(9,cycle.getDropoffTime());
             ps.execute();
             System.out.println("SQL QUERRY ===> " + ps.toString());
             con.commit();
@@ -120,8 +120,8 @@ public class CycleDAO {
                 cycle.setPlace(rs.getString("PLACE"));
                 cycle.setDefense(rs.getBoolean("DEFENSE"));
                 cycle.setDrop(rs.getBoolean("DROP_BOOL"));
-                cycle.setDropoffTime(rs.getTime("DROP_TIME"));
-                cycle.setPickupTime(rs.getTime("PICKUP_TIME"));
+                cycle.setDropoffTime(rs.getInt("DROP_TIME"));
+                cycle.setPickupTime(rs.getInt("PICKUP_TIME"));
                 cycleList.add(cycle);
             }
 
