@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class TeleopDAO {
 
-    public static final String INSERT_SQL_QUERRY = "INSERT INTO TELEOP (ID,TIME_CROSSED) VALUES(?,?)";
-    public static final String SELECT_SQL_QUERRY = "SELECT TIME_CROSSED FROM TELEOP WHERE ID=?";
+    public static final String INSERT_SQL_QUERRY = "INSERT INTO TELEOP (ID,TIME_CROSSES) VALUES(?,?)";
+    public static final String SELECT_SQL_QUERRY = "SELECT TIME_CROSSES FROM TELEOP WHERE ID=?";
 
     public static ArrayList<Teleop> selectInitInfo(int id, boolean cloud) throws SQLException {
         Connection con = null;
@@ -83,7 +83,8 @@ public class TeleopDAO {
                 return new Teleop();
             }
             ps = con.prepareStatement(INSERT_SQL_QUERRY);
-            ps.setInt(1,teleop.getTimeCrosses());
+            ps.setInt(1,teleop.getId());
+            ps.setInt(2,teleop.getTimeCrosses());
             con.setAutoCommit(false);
             ps.execute();
             System.out.println("SQL QUERRY ===> " + ps.toString());

@@ -187,7 +187,7 @@ public class BasicAPI {
     @Produces("text/plain")
     @Consumes("application/x-www-form-urlencoded")
     public String submitQueue(@FormParam("queue") String queue){
-        System.out.println(queue);
+        System.out.println("Post Queue: "+queue);
         QueueWrapper queueWrapper = gson.fromJson(queue, QueueWrapper.class);
         System.out.println(gson.toJson(queueWrapper));
         queueWrapper.insertSQL();
