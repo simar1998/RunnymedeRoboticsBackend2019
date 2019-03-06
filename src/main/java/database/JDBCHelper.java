@@ -31,15 +31,15 @@ public class JDBCHelper
    /**
     * The constant URL.
     */
-   final String URL_CLOUD         = "jdbc:mysql://localhost:3306/robotics";
+   final String URL_CLOUD         = "jdbc:mysql://www.everesttsystems.com:3306/robotics_test";
    /**
     * The constant USERNAME.
     */
-   final String USERNAME_CLOUD    = "root";
+   final String USERNAME_CLOUD    = "application";
    /**
     * The constant PASSWORD.
     */
-   final String PASSWORD_CLOUD    = "";
+   final String PASSWORD_CLOUD    = "Ets3qp2PR5x9Yber";
 
 
    private Connection connection;

@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CloudDAO {
+public class CloudDAO{
 
     public static final String GET_MAX_ID = "SELECT MAX(ID) FROM INIT_INFO";
 
@@ -27,7 +27,7 @@ public class CloudDAO {
             while (rs.next()){
                 id = rs.getInt(1);
             }
-
+            System.out.print("ID ------->  " + id);
             return id;
         }
         catch (SQLException e){
@@ -67,5 +67,7 @@ public class CloudDAO {
             e.printStackTrace();
         }
     }
+
+
 
 }
