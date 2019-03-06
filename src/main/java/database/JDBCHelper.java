@@ -44,9 +44,10 @@ public class JDBCHelper
 
    private Connection connection;
 
-   boolean isConnectionCloud = false;
+   boolean isConnectionCloud;
 
    public JDBCHelper( Boolean isConnectionCloud) {
+       this.isConnectionCloud = isConnectionCloud;
       try
       {
           this.isConnectionCloud = isConnectionCloud;

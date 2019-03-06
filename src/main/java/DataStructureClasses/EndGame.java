@@ -1,9 +1,5 @@
 package DataStructureClasses;
 
-import org.omg.CORBA.TIMEOUT;
-
-import java.sql.Time;
-import java.sql.Timestamp;
 
 /**
  * The type End game.

@@ -36,12 +36,13 @@ public class CloudDAO{
         }
     }
 
-    public static void checkCloudPresistantce(){
+    public static void checkCloudPresistantce() throws SQLException{
 
+        System.out.print("CLOUD CODE CALLED");
         int maxIDCloud = 0;
         int maxIDLocal = 0;
-        try {
             maxIDCloud = getMaxIdCloud(true);
+            System.out.print("Cloud max id = " + maxIDCloud);
             maxIDLocal = getMaxIdCloud(false);
             if(maxIDCloud == -1 || maxIDLocal == -1){
                 return;
@@ -58,14 +59,13 @@ public class CloudDAO{
                 submitMatch.setInitInfo(database.dao.InitInfoDAO.selectInitInfo(i,false));
                 submitMatch.setTeleopsList(database.dao.TeleopDAO.selectInitInfo(1,false));
             }
-            for (int i = 0; i<submitMatches.size(); i++){
+            System.out.print("Cloud max id = " + maxIDCloud);
+            for (int i = 0; maxIDCloud<submitMatches.size(); i++){
                 submitMatches.get(i).insertSQL(true);
             }
 
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
+
+
     }
 
 

@@ -115,20 +115,12 @@ public class InitInfoDAO {
             ps.setString(4,initInfo.getEvent());
             ps.setInt(5,initInfo.getYear());
             ps.setString(6,initInfo.getAllianceColour() + "");
-
-            ps.execute();
             con.setAutoCommit(false);
+            ps.execute();
             System.out.println("SQL QUERRY ===> " + ps.toString());
             con.commit();
         }
         catch (SQLException e){
-            try {
-                if (con != null) {
-                    con.rollback();
-                }
-            } catch (SQLException e1) {
-                throw e1;
-            }
             throw e;
         }
         finally {

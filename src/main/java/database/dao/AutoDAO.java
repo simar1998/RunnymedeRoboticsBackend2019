@@ -55,18 +55,12 @@ public class AutoDAO {
             ps.setInt(6,auto.getAutoLvl());
             ps.setInt(7,auto.getAutoOrder());
             ps.setString(8,auto.getAutoOrder() + "");
+            con.setAutoCommit(false);
             ps.execute();
             System.out.println("SQL QUERRY ===> " + ps.toString());
             con.commit();
         }
         catch (SQLException e){
-            try {
-                if (con != null) {
-                    con.rollback();
-                }
-            } catch (SQLException e1) {
-                throw e1;
-            }
             throw e;
         }
         finally {

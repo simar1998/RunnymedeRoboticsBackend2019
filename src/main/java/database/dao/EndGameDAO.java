@@ -53,19 +53,13 @@ public class EndGameDAO {
             ps.setFloat(6,endGame.getTimeToClimb());
             ps.setString(7, endGame.getFailLevel() + "");
             ps.setInt(8,endGame.getCimbStart());
-            ps.setInt(8,endGame.getClimbEnd());
+            ps.setInt(9,endGame.getClimbEnd());
+            con.setAutoCommit(false);
             ps.execute();
             System.out.println("SQL QUERRY ===> " + ps.toString());
             con.commit();
         }
         catch (SQLException e){
-            try {
-                if (con != null) {
-                    con.rollback();
-                }
-            } catch (SQLException e1) {
-                throw e1;
-            }
             throw e;
         }
         finally {

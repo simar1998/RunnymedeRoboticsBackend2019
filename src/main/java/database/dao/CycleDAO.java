@@ -23,7 +23,7 @@ public class CycleDAO {
      */
     public static final String SELECT_SQL_QUERRY = "SELECT ID,CYCLE_NO,FIELD_ELEMENT,PICKUP,DEFENDED,PLACE,DEFENSE,DROP_BOOL,PICKUP_TIME,DROP_TIME FROM CYCLES WHERE ID=?";
 
-    /**
+    /**setAutoCommit
      * Insert auto sql.
      *
      * @param cycle the cycle
@@ -56,17 +56,11 @@ public class CycleDAO {
             ps.setBoolean(7, cycle.isDrop());
             ps.setInt(8,cycle.getPickupTime());
             ps.setInt(9,cycle.getDropoffTime());
+            con.setAutoCommit(false);
             ps.execute();
             System.out.println("SQL QUERRY ===> " + ps.toString());
             con.commit();
         } catch (SQLException e) {
-            try {
-                if (con != null) {
-                    con.rollback();
-                }
-            } catch (SQLException e1) {
-                throw e1;
-            }
             throw e;
         } finally {
             try {

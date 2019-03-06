@@ -84,18 +84,12 @@ public class TeleopDAO {
             }
             ps = con.prepareStatement(INSERT_SQL_QUERRY);
             ps.setInt(1,teleop.getTimeCrosses());
+            con.setAutoCommit(false);
             ps.execute();
             System.out.println("SQL QUERRY ===> " + ps.toString());
             con.commit();
         }
         catch (SQLException e){
-            try {
-                if (con != null) {
-                    con.rollback();
-                }
-            } catch (SQLException e1) {
-                throw e1;
-            }
             throw e;
         }
         finally {
