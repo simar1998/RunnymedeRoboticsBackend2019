@@ -1,13 +1,13 @@
 package database.dao;
 
 import DataStructureClasses.InitInfo;
-import database.CloudDB.CloudDAO;
-import database.JDBCHelper;
-
+import com.sun.org.apache.xml.internal.security.Init;
+import database.DatabaseConfig;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * The type Init info dao.
@@ -17,11 +17,18 @@ public class InitInfoDAO {
     /**
      * The constant INSERT_SQL_QUERRY.
      */
-    public static final String INSERT_SQL_QUERRY = "INSERT INTO INIT_INFO(NAME,MATCH_NO,TEAM_NO,EVENT,YEAR_VAL,COLOUR) VALUES(?,?,?,?,?,?)";
+    public static final String INSERT_SQL_QUERRY = "INSERT INTO INIT_INFO (NAME,MATCH_NO,TEAM_NO,EVENT,YEAR_VAL,COLOUR) VALUES(?,?,?,?,?,?)";
     /**
      * The constant SELECT_SQL_QUERRY.
      */
     public static final String SELECT_SQL_QUERRY = "SELECT ID,MATCH_NO,TEAM_NO,EVENT,YEAR_VAL,COLOUR FROM INIT_INFO WHERE ID = ?";
+
+    public static final String SELECT_SQL_QUERRY_ALL = "SELECT * FROM INIT_INFO";
+
+    /**
+     * Gets max id from database;
+     */
+    public static final String GET_MAX_ID = "SELECT MAX(ID) FROM INIT_INFO";
 
 
     /**
@@ -36,17 +43,10 @@ public class InitInfoDAO {
         PreparedStatement ps= null;
         ResultSet rs = null;
         InitInfo initInfo = new InitInfo();
-        JDBCHelper jdbcHelper = null;
+
         try
         {
-            if(cloud){
-                jdbcHelper = new JDBCHelper(true);
-                con = jdbcHelper.getConnection();
-            }
-            else {
-                jdbcHelper = new JDBCHelper(false);
-                con = jdbcHelper.getConnection();
-            }
+            con = DatabaseConfig.getLocalMySQLConn();
             if (con == null) {
                 System.out.println("Error getting the connection. Please check if the DB server is running");
 
@@ -71,9 +71,9 @@ public class InitInfoDAO {
         finally {
             try
             {
-                jdbcHelper.closeResultSet( rs );
-                jdbcHelper.closePrepaerdStatement( ps );
-                jdbcHelper.closeConnection( con );
+                rs.close();
+                ps.close();
+                con.close();
             }
             catch ( SQLException e )
             {
@@ -94,16 +94,8 @@ public class InitInfoDAO {
     public static int insertInitInfoSQL(InitInfo initInfo, boolean cloud) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
-        JDBCHelper jdbcHelper = null;
         try {
-            if(cloud){
-                jdbcHelper = new JDBCHelper(true);
-                con = jdbcHelper.getConnection();
-            }
-            else {
-                jdbcHelper = new JDBCHelper(false);
-                con = jdbcHelper.getConnection();
-            }
+            con = DatabaseConfig.getLocalMySQLConn();
             if (con == null) {
                 System.out.println("Error getting the connection. Please check if the DB server is running");
                 return 0;
@@ -125,16 +117,87 @@ public class InitInfoDAO {
         }
         finally {
             try {
-                jdbcHelper.closePrepaerdStatement(ps);
-                jdbcHelper.closeConnection(con);
+                ps.close();
+                con.close();;
             } catch (SQLException e) {
                 throw e;
             }
         }
-        int maxID = CloudDAO.getMaxIdCloud(cloud);
+        int maxID = getMaxIdCloud();
         System.out.println(maxID);
         return maxID;
 
+    }
+
+    public static int getMaxIdCloud() {
+        try {
+            int id = 0;
+            Connection con = null;
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            con = DatabaseConfig.getLocalMySQLConn();
+            ps = con.prepareStatement(GET_MAX_ID);
+            rs = ps.executeQuery();
+            System.out.println(rs.toString());
+            while (rs.next()){
+                id = rs.getInt(1);
+            }
+            System.out.print("ID ------->  " + id);
+            return id;
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public static ArrayList<InitInfo> selectInitInfoAll() throws SQLException{
+        Connection con = null;
+        PreparedStatement ps= null;
+        ResultSet rs = null;
+        InitInfo initInfo = new InitInfo();
+        ArrayList<InitInfo> initInfos = new ArrayList<>();
+        try
+        {
+            con = DatabaseConfig.getLocalMySQLConn();
+            if (con == null) {
+                System.out.println("Error getting the connection. Please check if the DB server is running");
+
+            }
+            ps = con.prepareStatement(SELECT_SQL_QUERRY_ALL);
+            rs = ps.executeQuery();
+            System.out.println( "retriveCommands => " + ps.toString() );
+            while (rs.next()) {
+                initInfo.setId(rs.getInt("ID"));
+                initInfo.setName(rs.getString("NAME"));
+                System.out.println("Name : " + initInfo.getName());
+                initInfo.setMatchNumber(rs.getInt("MATCH_NO"));
+                initInfo.setTeamNumber(rs.getInt("TEAM_NO"));
+                initInfo.setEvent(rs.getString("EVENT"));
+                initInfo.setYear(rs.getInt("YEAR_VAL"));
+                initInfo.setAllianceColour(rs.getString("COLOUR").charAt(0));
+                initInfos.add(initInfo);
+            }
+
+        }
+        catch (SQLException e)
+        {
+            throw e;
+        }
+
+        finally {
+            try
+            {
+                rs.close();
+                ps.close();
+                con.close();
+            }
+            catch ( SQLException e )
+            {
+                throw e;
+            }
+        }
+        return initInfos;
     }
 
 
