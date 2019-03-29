@@ -8,8 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
 /**
+ *
  * The type Auto dao.
  */
 public class AutoDAO {
@@ -23,6 +23,7 @@ public class AutoDAO {
      */
     public static final String SELECT_SQL_QUERRY = "SELECT ID,STRING_POS,PLACE_POS,STARTING_OBJ,TIME FROM,AUTO_LVL,AUTO_ORDER,AUTO_PRELOAD FROM AUTO WHERE ID=?";
 
+    public static final String REMOVE_ENTRY = "DELETE FROM AUTO WHERE ID = ?";
     /**
      * Insert auto sql.
      *
@@ -119,6 +120,23 @@ public class AutoDAO {
             }
         }
         return auto;
+    }
+
+    public static void deleteFromTable( int id) {
+        try {
+            Connection con = null;
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            con = DatabaseConfig.getLocalMySQLConn();
+            ps = con.prepareStatement(REMOVE_ENTRY);
+            ps.setInt(1,id);
+            ps.executeQuery();
+            ps.close();
+            con.close();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
 

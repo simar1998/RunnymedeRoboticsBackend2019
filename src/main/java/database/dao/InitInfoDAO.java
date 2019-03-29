@@ -1,7 +1,6 @@
 package database.dao;
 
 import DataStructureClasses.InitInfo;
-import com.sun.org.apache.xml.internal.security.Init;
 import database.DatabaseConfig;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +16,7 @@ public class InitInfoDAO {
     /**
      * The constant INSERT_SQL_QUERRY.
      */
-    public static final String INSERT_SQL_QUERRY = "INSERT INTO INIT_INFO (NAME,MATCH_NO,TEAM_NO,EVENT,YEAR_VAL,COLOUR) VALUES(?,?,?,?,?,?)";
+    public static final String INSERT_SQL_QUERRY = "INSERT INTO INIT_INFO (NAME,MATCH_NO,TEAM_NO,EVENT,YEAR_VAL,COLOUR,REPLAYED) VALUES(?,?,?,?,?,?.?)";
     /**
      * The constant SELECT_SQL_QUERRY.
      */
@@ -29,6 +28,10 @@ public class InitInfoDAO {
      * Gets max id from database;
      */
     public static final String GET_MAX_ID = "SELECT MAX(ID) FROM INIT_INFO";
+
+    public static final String SELECT_SQL_QUERRY_DUPLICATE_ = "SELECT ID,MATCH_NO,TEAM_NO,EVENT,YEAR_VAL,COLOUR,REPLAYED,NAME FROM INIT_INFO WHERE MATCH_NO = ? AND TEAM_NO = ? AND NAME = ?";
+
+    public static final String REMOVE_ENTRY = "DELETE FROM INIT_INFO WHERE ID = ?";
 
 
     /**
@@ -107,6 +110,7 @@ public class InitInfoDAO {
             ps.setString(4,initInfo.getEvent());
             ps.setInt(5,initInfo.getYear());
             ps.setString(6,initInfo.getAllianceColour() + "");
+            ps.setInt(7,initInfo.getIsReplayed());
             con.setAutoCommit(false);
             ps.execute();
             System.out.println("SQL QUERRY ===> " + ps.toString());
@@ -151,11 +155,27 @@ public class InitInfoDAO {
         }
     }
 
-    public static ArrayList<InitInfo> selectInitInfoAll() throws SQLException{
+    public static void deleteFromTable( int id) {
+        try {
+            Connection con = null;
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            con = DatabaseConfig.getLocalMySQLConn();
+            ps = con.prepareStatement(REMOVE_ENTRY);
+            ps.setInt(1,id);
+            rs = ps.executeQuery();
+            ps.close();
+            con.close();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<InitInfo> selectDuplicateEntry(InitInfo initInfo) throws SQLException{
         Connection con = null;
         PreparedStatement ps= null;
         ResultSet rs = null;
-        InitInfo initInfo = new InitInfo();
         ArrayList<InitInfo> initInfos = new ArrayList<>();
         try
         {
@@ -164,7 +184,10 @@ public class InitInfoDAO {
                 System.out.println("Error getting the connection. Please check if the DB server is running");
 
             }
-            ps = con.prepareStatement(SELECT_SQL_QUERRY_ALL);
+            ps = con.prepareStatement(SELECT_SQL_QUERRY_DUPLICATE_);
+            ps.setInt(1, initInfo.getMatchNumber());
+            ps.setInt(2, initInfo.getTeamNumber());
+            ps.setString(3,initInfo.getName());
             rs = ps.executeQuery();
             System.out.println( "retriveCommands => " + ps.toString() );
             while (rs.next()) {
@@ -176,12 +199,14 @@ public class InitInfoDAO {
                 initInfo.setEvent(rs.getString("EVENT"));
                 initInfo.setYear(rs.getInt("YEAR_VAL"));
                 initInfo.setAllianceColour(rs.getString("COLOUR").charAt(0));
+                initInfo.setReplayed(rs.getInt("REPLAYED"));
                 initInfos.add(initInfo);
             }
 
         }
         catch (SQLException e)
         {
+            e.printStackTrace();
             throw e;
         }
 

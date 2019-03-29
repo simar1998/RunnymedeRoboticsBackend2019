@@ -22,6 +22,7 @@ public class CycleDAO {
      */
     public static final String SELECT_SQL_QUERRY = "SELECT ID,CYCLE_NO,FIELD_ELEMENT,PICKUP,DEFENDED,PLACE,DEFENSE,DROP_BOOL,PICKUP_TIME,DROP_TIME FROM CYCLE WHERE ID=?";
 
+    public static final String REMOVE_ENTRY = "DELETE FROM CYCLE WHERE ID =?";
     /**setAutoCommit
      * Insert auto sql.
      *
@@ -114,6 +115,23 @@ public class CycleDAO {
             }
         }
         return cycleList;
+    }
+
+    public static void deleteFromTable( int id) {
+        try {
+            Connection con = null;
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            con = DatabaseConfig.getLocalMySQLConn();
+            ps = con.prepareStatement(REMOVE_ENTRY);
+            ps.setInt(1,id);
+            rs = ps.executeQuery();
+            ps.close();
+            con.close();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
 

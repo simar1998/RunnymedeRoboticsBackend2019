@@ -11,6 +11,7 @@ public class TeleopDAO {
 
     public static final String INSERT_SQL_QUERRY = "INSERT INTO TELEOP (ID,TIME_CROSSES) VALUES(?,?)";
     public static final String SELECT_SQL_QUERRY = "SELECT TIME_CROSSES FROM TELEOP WHERE ID=?";
+    public static final String DELETE_SQL_ENTRY = "DELETE FROM TIME_CROSSES WHERE ID=?";
 
     public static ArrayList<Teleop> selectInitInfo(int id, boolean cloud) throws SQLException {
         Connection con = null;
@@ -88,6 +89,23 @@ public class TeleopDAO {
             }
         }
         return  teleop;
+    }
+
+    public static void deleteFromTable( int id) {
+        try {
+            Connection con = null;
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            con = DatabaseConfig.getLocalMySQLConn();
+            ps = con.prepareStatement(DELETE_SQL_ENTRY);
+            ps.setInt(1,id);
+            rs = ps.executeQuery();
+            ps.close();
+            con.close();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
 

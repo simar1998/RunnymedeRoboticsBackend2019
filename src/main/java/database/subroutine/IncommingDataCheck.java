@@ -4,6 +4,7 @@ import DataStructureClasses.InitInfo;
 import DataStructureClasses.SubmitMatch;
 import DataStructureClasses.Teleop;
 import com.google.gson.Gson;
+import com.sun.org.apache.xml.internal.security.Init;
 import database.DatabaseConfig;
 import database.dao.InitInfoDAO;
 
@@ -15,20 +16,23 @@ import java.util.ArrayList;
 
 public class IncommingDataCheck {
 
-    public static void incommingSubmitMatch(ArrayList<SubmitMatch> submitMatches){
+    public static void incommingSubmitMatch(ArrayList<SubmitMatch> submitMatches) throws SQLException {
 
-        try {
-            ArrayList<InitInfo> initInfos = InitInfoDAO.selectInitInfoAll();
-            for(int i = 0; i < submitMatches.size(); i++){
-                for(int f = 0; f <initInfos.size(); f++) {
-                    if (submitMatches.get(i).getInitInfo().getName().equals(initInfos.get(f).getName()) && submitMatches.get(i).getInitInfo().getMatchNumber() == initInfos.get(f).getMatchNumber() && submitMatches.get(i).getInitInfo().getTeamNumber() == initInfos.get(f).getTeamNumber()){
-                        submitMatches.remove(i);
-                    }
-                }
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+       for(int i = 0; i< submitMatches.size() ; i++){
+           if(InitInfoDAO.selectDuplicateEntry(submitMatches.get(i).getInitInfo()).isEmpty()){
+               submitMatches.get(i).insertSQL(false);
+           }
+           else {
+               if(submitMatches.get(i).getInitInfo().getIsReplayed() > 0){
+                   int id = InitInfoDAO.selectDuplicateEntry(submitMatches.get(i).getInitInfo()).get(0).getId();
+                   SubmitMatch.removeEntryFromDatabase(id);
+                   InitInfoDAO.insertInitInfoSQL(submitMatches.get(i).getInitInfo(), true);
+               }
+               else {
+                   submitMatches.remove(i);
+               }
+           }
+       }
 
     }
 

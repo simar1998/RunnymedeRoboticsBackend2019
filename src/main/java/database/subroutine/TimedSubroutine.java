@@ -7,7 +7,7 @@ public class TimedSubroutine implements Runnable{
     @Override
     public void run() {
         try {
-            System.out.println(tbaRequestHTTP.getTBAMatchData());
+            System.out.println(TbaRequestHTTP.getTBAMatchData());
         } catch (IOException e) {
             e.printStackTrace();
         }

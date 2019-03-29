@@ -2,7 +2,7 @@ package api;
 
 import DataStructureClasses.*;
 import com.google.gson.Gson;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
+import database.subroutine.IncommingDataCheck;
 
 import javax.ws.rs.*;
 import java.sql.SQLException;
@@ -191,7 +191,13 @@ public class DatabaseAPI {
         System.out.println("Post Queue: "+queue);
         QueueWrapper queueWrapper = gson.fromJson(queue, QueueWrapper.class);
         System.out.println(gson.toJson(queueWrapper));
-        return  queueWrapper.insertSQL();
+        try {
+            IncommingDataCheck.incommingSubmitMatch(queueWrapper.getSubmitMatchArrayList());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "SQL ERROR CHECK CODE OR CREDENTIALS PLEASE";
+        }
+        return  "POST DONE";
     }
 
     @GET
@@ -202,6 +208,8 @@ public class DatabaseAPI {
         database.subroutine.IncommingDataCheck.tablesChecl();
         return "Test api call";
     }
+
+
 
 
 

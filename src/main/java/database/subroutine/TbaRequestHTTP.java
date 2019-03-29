@@ -10,9 +10,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class tbaRequestHTTP {
+public class TbaRequestHTTP {
 
-    String autKey = "IFNmxeN26EKG5jzgrk3rdvmwHWVtS1HwZQQMy2FXJOV6MdsiVcG6smti6EetgaOD";
+    static String startautKey = "IFNmxeN26EKG5jzgrk3rdvmwHWVtS1HwZQQMy2FXJOV6MdsiVcG6smti6EetgaOD";
 
     public static String getTBAMatchData() throws IOException {
 
@@ -25,8 +25,9 @@ public class tbaRequestHTTP {
         // optional default is GET
         con.setRequestMethod("GET");
 
+
         //add request header
-        con.setRequestProperty("X-TBA-Auth-Key", "IFNmxeN26EKG5jzgrk3rdvmwHWVtS1HwZQQMy2FXJOV6MdsiVcG6smti6EetgaOD");
+        con.setRequestProperty("X-TBA-Auth-Key", startautKey);
 
         int responseCode = con.getResponseCode();
         System.out.println("\nSending 'GET' request to URL : " + url);

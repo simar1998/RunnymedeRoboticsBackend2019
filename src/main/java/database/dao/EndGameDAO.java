@@ -20,6 +20,7 @@ public class EndGameDAO {
      */
     public static final String SELECT_SQL_QUERRY = "SELECT ID,LEVEL_ONE,LEVEL_TWO,LEVEL_THREE,RAMPS,TIME_TO_CLIMB,FAIL_LEVEL,CLIMB_START,CLIMB_END FROM END_GAME WHERE ID=?";
 
+    public static final String REMOVE_ENTRY = "DELETE FROM END_GAME WHERE ID = ?";
     /**
      * Insert auto sql.
      *
@@ -118,6 +119,23 @@ public class EndGameDAO {
             }
         }
         return endGame;
+    }
+
+    public static void deleteFromTable( int id) {
+        try {
+            Connection con = null;
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            con = DatabaseConfig.getLocalMySQLConn();
+            ps = con.prepareStatement(REMOVE_ENTRY);
+            ps.setInt(1,id);
+            rs = ps.executeQuery();
+            ps.close();
+            con.close();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
 
