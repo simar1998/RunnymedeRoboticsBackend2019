@@ -16,11 +16,11 @@ public class InitInfoDAO {
     /**
      * The constant INSERT_SQL_QUERRY.
      */
-    public static final String INSERT_SQL_QUERRY = "INSERT INTO INIT_INFO (NAME,MATCH_NO,TEAM_NO,EVENT,YEAR_VAL,COLOUR,REPLAYED) VALUES(?,?,?,?,?,?.?)";
+    public static final String INSERT_SQL_QUERRY = "INSERT INTO INIT_INFO (NAME,MATCH_NO,TEAM_NO,EVENT,YEAR_VAL,COLOUR,REPLAYED) VALUES(?,?,?,?,?,?,?)";
     /**
      * The constant SELECT_SQL_QUERRY.
      */
-    public static final String SELECT_SQL_QUERRY = "SELECT ID,MATCH_NO,TEAM_NO,EVENT,YEAR_VAL,COLOUR FROM INIT_INFO WHERE ID = ?";
+    public static final String SELECT_SQL_QUERRY = "SELECT ID,MATCH_NO,TEAM_NO,EVENT,YEAR_VAL,COLOUR FROM INIT_INFO WHERE ID = ? ";
 
     public static final String SELECT_SQL_QUERRY_ALL = "SELECT * FROM INIT_INFO";
 
@@ -29,7 +29,7 @@ public class InitInfoDAO {
      */
     public static final String GET_MAX_ID = "SELECT MAX(ID) FROM INIT_INFO";
 
-    public static final String SELECT_SQL_QUERRY_DUPLICATE_ = "SELECT ID,MATCH_NO,TEAM_NO,EVENT,YEAR_VAL,COLOUR,REPLAYED,NAME FROM INIT_INFO WHERE MATCH_NO = ? AND TEAM_NO = ? AND NAME = ?";
+    public static final String SELECT_SQL_QUERRY_DUPLICATE_ = "SELECT * FROM INIT_INFO WHERE MATCH_NO = ? AND TEAM_NO = ? AND NAME = ? ";
 
     public static final String REMOVE_ENTRY = "DELETE FROM INIT_INFO WHERE ID = ?";
 
@@ -183,6 +183,9 @@ public class InitInfoDAO {
             if (con == null) {
                 System.out.println("Error getting the connection. Please check if the DB server is running");
 
+            }
+            if(initInfo.getName().equals("")){
+                initInfo.setName(" ");
             }
             ps = con.prepareStatement(SELECT_SQL_QUERRY_DUPLICATE_);
             ps.setInt(1, initInfo.getMatchNumber());

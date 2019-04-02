@@ -11,8 +11,8 @@ public class DatabaseConfig {
 
         localConnector.setDatabaseName("robotics");
         localConnector.setIp("localhost");
-        localConnector.setUserName("data");
-        localConnector.setUserPassword("1310");
+        localConnector.setUserName("root");
+        localConnector.setUserPassword("");
 
         localConnector.loadJDBCDriver();
         localMySQL = localConnector.getConnection();

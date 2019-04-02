@@ -1,13 +1,10 @@
 package database.subroutine;
 
-import sun.net.www.http.HttpClient;
 
-import javax.ws.rs.core.HttpHeaders;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class TbaRequestHTTP {
@@ -18,7 +15,7 @@ public class TbaRequestHTTP {
 
         String url = "www.thebluealliance.com/api/v3/event/2019onnob/matches";
 
-        URL obj = new URL("www.thebluealliance.com/api/v3/event/2019onnob/matches");
+        URL obj = new URL("http://www.thebluealliance.com/api/v3/event/2019onnob/matches");
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 
@@ -28,6 +25,7 @@ public class TbaRequestHTTP {
 
         //add request header
         con.setRequestProperty("X-TBA-Auth-Key", startautKey);
+        con.setRequestProperty("User-Agent","TBA-API");
 
         int responseCode = con.getResponseCode();
         System.out.println("\nSending 'GET' request to URL : " + url);

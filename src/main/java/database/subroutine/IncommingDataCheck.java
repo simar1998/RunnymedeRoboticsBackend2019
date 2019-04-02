@@ -19,7 +19,7 @@ public class IncommingDataCheck {
     public static void incommingSubmitMatch(ArrayList<SubmitMatch> submitMatches) throws SQLException {
 
        for(int i = 0; i< submitMatches.size() ; i++){
-           if(InitInfoDAO.selectDuplicateEntry(submitMatches.get(i).getInitInfo()).isEmpty()){
+      if(InitInfoDAO.selectDuplicateEntry(submitMatches.get(i).getInitInfo()).isEmpty()){
                submitMatches.get(i).insertSQL(false);
            }
            else {

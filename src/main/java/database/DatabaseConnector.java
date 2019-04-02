@@ -3,6 +3,7 @@ package database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import com.mysql.cj.jdbc.Driver;
 
 /**
  * Stores database information and also establishes connection to the database
@@ -31,14 +32,13 @@ public class DatabaseConnector {
      */
     public void loadJDBCDriver(){
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             isDriverLoaded = true;
             System.out.println("MySQL JDBC driver registered");
         } catch (ClassNotFoundException e) {
             System.out.println("JDBC Driver Load error in JDBC Driver Class");
             e.printStackTrace();
             isDriverLoaded = false;
-            return;
         }
 
     }
@@ -56,7 +56,7 @@ public class DatabaseConnector {
         if (areCredentialsPresent) {
             try {
                 System.out.println("MYSQL URL : jdbc:mysql://"+ip+":"+port+"/"+databaseName +" "+userName+ " " +userPassword);
-                connection = DriverManager.getConnection("jdbc:mysql://"+ip+":"+port+"/"+databaseName,userName,userPassword);
+                connection = DriverManager.getConnection("jdbc:mysql://"+ip+":"+port+"/"+databaseName+"?autoReconnect=true&useSSL=false",userName,userPassword);
                 if (connection != null){
                     System.out.println("Connection to database " + databaseName + " successful with user " + userName);
                 }
@@ -65,6 +65,7 @@ public class DatabaseConnector {
                 }
                 return connection;
             } catch (SQLException e) {
+                e.printStackTrace();
                 System.out.println("JDBC Connection error, please check user credentials");
             }
         }

@@ -209,6 +209,16 @@ public class DatabaseAPI {
         return "Test api call";
     }
 
+    @POST
+    @Path("addMatch")
+    @Produces("text/plain")
+    @Consumes("application/x-www-form-urlencoded")
+    public String addMatch(@FormParam("match") String match){
+        SubmitMatch submitMatch = (new Gson()).fromJson(match,SubmitMatch.class);
+        submitMatch.insertSQL(false);
+        return "POST DONE";
+    }
+
 
 
 

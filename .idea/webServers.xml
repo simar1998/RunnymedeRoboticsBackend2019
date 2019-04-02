@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="702a465b-7c7e-4b50-ac80-2e910db4d409" name="aws_glassfish_1" url="http://35.182.99.234">
-        <fileTransfer host="35.182.99.234" port="22" privateKey="C:\Users\Simar\Downloads\aws_robotics.ppk" rootFolder="/home/ubuntu" accessType="SFTP" keyPair="true">
+      <webServer id="702a465b-7c7e-4b50-ac80-2e910db4d409" name="aws_glassfish_1" url="http://35.182.52.212">
+        <fileTransfer host="35.182.52.212" port="22" privateKey="C:\Users\Simar\Downloads\aws_robotics.ppk" rootFolder="/home/ubuntu" accessType="SFTP" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
