@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import database.subroutine.IncommingDataCheck;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 import java.sql.SQLException;
 
 /**
@@ -187,17 +188,24 @@ public class DatabaseAPI {
     @Path("/addQueueWrapper")
     @Produces("text/plain")
     @Consumes("application/x-www-form-urlencoded")
-    public String submitQueue(@FormParam("queue") String queue){
+    public Response submitQueue(@FormParam("queue") String queue){
         System.out.println("Post Queue: "+queue);
         QueueWrapper queueWrapper = gson.fromJson(queue, QueueWrapper.class);
         System.out.println(gson.toJson(queueWrapper));
+
         try {
             IncommingDataCheck.incommingSubmitMatch(queueWrapper.getSubmitMatchArrayList());
         } catch (SQLException e) {
             e.printStackTrace();
-            return "SQL ERROR CHECK CODE OR CREDENTIALS PLEASE";
+            return Response
+                    .status(Response.Status.SEE_OTHER)
+                    .entity("SQL ERROR CHECK CODE OR CREDENTIALS PLEASE")
+                    .build();
         }
-        return  "POST DONE";
+        return Response
+                .status(Response.Status.OK)
+                .entity("POST DONE")
+                .build();
     }
 
     @GET
