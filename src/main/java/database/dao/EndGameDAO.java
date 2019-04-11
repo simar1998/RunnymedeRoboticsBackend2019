@@ -1,8 +1,7 @@
 package database.dao;
 
 import DataStructureClasses.EndGame;
-import database.JDBCHelper;
-
+import database.DatabaseConfig;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +20,7 @@ public class EndGameDAO {
      */
     public static final String SELECT_SQL_QUERRY = "SELECT ID,LEVEL_ONE,LEVEL_TWO,LEVEL_THREE,RAMPS,TIME_TO_CLIMB,FAIL_LEVEL,CLIMB_START,CLIMB_END FROM END_GAME WHERE ID=?";
 
+    public static final String REMOVE_ENTRY = "DELETE FROM END_GAME WHERE ID = ?";
     /**
      * Insert auto sql.
      *
@@ -30,16 +30,8 @@ public class EndGameDAO {
     public static void insertAutoSQL(EndGame endGame, Boolean cloud) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
-        JDBCHelper jdbcHelper = null;
         try {
-            if(cloud){
-                jdbcHelper = new JDBCHelper(true);
-                con = jdbcHelper.getConnection();
-            }
-            else {
-                jdbcHelper = new JDBCHelper(false);
-                con = jdbcHelper.getConnection();
-            }
+            con = DatabaseConfig.getLocalMySQLConn();
             if (con == null) {
                 System.out.println("Error getting the connection. Please check if the DB server is running");
                 return;
@@ -64,8 +56,8 @@ public class EndGameDAO {
         }
         finally {
             try {
-                jdbcHelper.closePrepaerdStatement(ps);
-                jdbcHelper.closeConnection(con);
+                ps.close();
+                con.close();
             } catch (SQLException e) {
                 throw e;
             }
@@ -85,17 +77,9 @@ public class EndGameDAO {
         PreparedStatement ps= null;
         ResultSet rs = null;
         EndGame endGame = new EndGame();
-        JDBCHelper jdbcHelper = null;
         try
         {
-            if(cloud){
-                jdbcHelper = new JDBCHelper(true);
-                con = jdbcHelper.getConnection();
-            }
-            else {
-                jdbcHelper = new JDBCHelper(false);
-                con = jdbcHelper.getConnection();
-            }
+            con = DatabaseConfig.getLocalMySQLConn();
             if (con == null) {
                 System.out.println("Error getting the connection. Please check if the DB server is running");
 
@@ -125,9 +109,9 @@ public class EndGameDAO {
         finally {
             try
             {
-                jdbcHelper.closeResultSet( rs );
-                jdbcHelper.closePrepaerdStatement( ps );
-                jdbcHelper.closeConnection( con );
+                rs.close();
+                ps.close();
+                con.close();
             }
             catch ( SQLException e )
             {
@@ -135,6 +119,23 @@ public class EndGameDAO {
             }
         }
         return endGame;
+    }
+
+    public static void deleteFromTable( int id) {
+        try {
+            Connection con = null;
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            con = DatabaseConfig.getLocalMySQLConn();
+            ps = con.prepareStatement(REMOVE_ENTRY);
+            ps.setInt(1,id);
+            rs = ps.executeQuery();
+            ps.close();
+            con.close();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
 

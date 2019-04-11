@@ -8,6 +8,9 @@
           <element id="module-output" name="RunnymedeRoboticsScoutingApplication" />
         </element>
       </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/out/artifacts/RunnymedeRoboticsScoutingApplication_war_exploded/META-INF/MANIFEST.MF" />
+      </element>
     </root>
   </artifact>
 </component>

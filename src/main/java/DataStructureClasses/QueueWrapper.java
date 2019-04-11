@@ -1,6 +1,7 @@
 package DataStructureClasses;
 
-import java.sql.SQLException;
+import database.subroutine.IncommingDataCheck;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -31,10 +32,16 @@ public class QueueWrapper {
         submitMatchArrayList.add(submitMatch);
     }
 
-    public void insertSQL(){
-        Iterator<SubmitMatch> submitMatchIterator = submitMatchArrayList.iterator();
-        while (submitMatchIterator.hasNext()){
-            submitMatchIterator.next().insertSQL(false);
+    public String insertSQL() {
+        //IncommingDataCheck.incommingSubmitMatch(submitMatchArrayList);
+
+        if (!submitMatchArrayList.isEmpty()) {
+            Iterator<SubmitMatch> submitMatchIterator = submitMatchArrayList.iterator();
+            while (submitMatchIterator.hasNext()) {
+                submitMatchIterator.next().insertSQL(false);
+            }
+            return "POST OKAY";
         }
+        return "DUPLICATE INFORMATION SENT, IT HAS BEEN DISCARDED";
     }
 }

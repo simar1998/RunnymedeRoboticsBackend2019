@@ -2,7 +2,7 @@ package database.dao;
 
 
 import DataStructureClasses.Teleop;
-import database.JDBCHelper;
+import database.DatabaseConfig;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,24 +11,18 @@ public class TeleopDAO {
 
     public static final String INSERT_SQL_QUERRY = "INSERT INTO TELEOP (ID,TIME_CROSSES) VALUES(?,?)";
     public static final String SELECT_SQL_QUERRY = "SELECT TIME_CROSSES FROM TELEOP WHERE ID=?";
+    public static final String DELETE_SQL_ENTRY = "DELETE FROM TIME_CROSSES WHERE ID=?";
 
     public static ArrayList<Teleop> selectInitInfo(int id, boolean cloud) throws SQLException {
         Connection con = null;
         PreparedStatement ps= null;
         ResultSet rs = null;
         ArrayList<Teleop> teleopList = new ArrayList<>();
-        JDBCHelper jdbcHelper = null;
+
 
         try
         {
-            if(cloud){
-                jdbcHelper = new JDBCHelper(true);
-                con = jdbcHelper.getConnection();
-            }
-            else {
-                jdbcHelper = new JDBCHelper(false);
-                con = jdbcHelper.getConnection();
-            }
+            con = DatabaseConfig.getLocalMySQLConn();
             if (con == null) {
                 System.out.println("Error getting the connection. Please check if the DB server is running");
 
@@ -53,9 +47,9 @@ public class TeleopDAO {
         finally {
             try
             {
-                jdbcHelper.closeResultSet( rs );
-                jdbcHelper.closePrepaerdStatement( ps );
-                jdbcHelper.closeConnection( con );
+                rs.close();
+                ps.close();
+                con.close();
             }
             catch ( SQLException e )
             {
@@ -68,16 +62,9 @@ public class TeleopDAO {
     public static Teleop insertInitInfoSQL(Teleop teleop, boolean cloud) throws SQLException {
         Connection con = null;
         PreparedStatement ps = null;
-        JDBCHelper jdbcHelper = null;
+
         try {
-            if(cloud){
-                jdbcHelper = new JDBCHelper(true);
-                con = jdbcHelper.getConnection();
-            }
-            else {
-                jdbcHelper = new JDBCHelper(false);
-                con = jdbcHelper.getConnection();
-            }
+            con = DatabaseConfig.getLocalMySQLConn();
             if (con == null) {
                 System.out.println("Error getting the connection. Please check if the DB server is running");
                 return new Teleop();
@@ -95,13 +82,30 @@ public class TeleopDAO {
         }
         finally {
             try {
-                jdbcHelper.closePrepaerdStatement(ps);
-                jdbcHelper.closeConnection(con);
+                ps.close();
+                con.close();
             } catch (SQLException e) {
                 throw e;
             }
         }
         return  teleop;
+    }
+
+    public static void deleteFromTable( int id) {
+        try {
+            Connection con = null;
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+            con = DatabaseConfig.getLocalMySQLConn();
+            ps = con.prepareStatement(DELETE_SQL_ENTRY);
+            ps.setInt(1,id);
+            rs = ps.executeQuery();
+            ps.close();
+            con.close();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
 

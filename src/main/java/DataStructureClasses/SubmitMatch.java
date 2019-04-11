@@ -1,6 +1,6 @@
 package DataStructureClasses;
 
-import database.dao.TeleopDAO;
+import database.dao.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -108,4 +108,14 @@ public class SubmitMatch {
             e.printStackTrace();
         }
     }
+
+    public static void removeEntryFromDatabase(int id){
+        InitInfoDAO.deleteFromTable(id);
+        AutoDAO.deleteFromTable(id);
+        TeleopDAO.deleteFromTable(id);
+        EndGameDAO.deleteFromTable(id);
+        CycleDAO.deleteFromTable(id);
+    }
+
+
 }

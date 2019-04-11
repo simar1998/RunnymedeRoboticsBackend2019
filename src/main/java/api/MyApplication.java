@@ -20,7 +20,8 @@ public class MyApplication extends Application {
     @Override
     public Set<Class<?>> getClasses() {
         HashSet h = new HashSet<Class<?>>();
-        h.add(BasicAPI.class);
+        h.add(DatabaseAPI.class);
         return h;
     }
+
 }

@@ -2,6 +2,7 @@ package api;
 
 import DataStructureClasses.*;
 import com.google.gson.Gson;
+import database.subroutine.IncommingDataCheck;
 
 import javax.ws.rs.*;
 import java.sql.SQLException;
@@ -10,7 +11,7 @@ import java.sql.SQLException;
  * The type Basic api.
  */
 @Path("/Database")
-public class BasicAPI {
+public class DatabaseAPI {
 
     /**
      * The Gson.ss
@@ -190,10 +191,37 @@ public class BasicAPI {
         System.out.println("Post Queue: "+queue);
         QueueWrapper queueWrapper = gson.fromJson(queue, QueueWrapper.class);
         System.out.println(gson.toJson(queueWrapper));
-        queueWrapper.insertSQL();
-        return "post_complete";
-
+        try {
+            IncommingDataCheck.incommingSubmitMatch(queueWrapper.getSubmitMatchArrayList());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "SQL ERROR CHECK CODE OR CREDENTIALS PLEASE";
+        }
+        return  "POST DONE";
     }
+
+    @GET
+    @Path("/test")
+    @Produces("text/plain")
+    @Consumes("application/x-www-form-urlencoded")
+    public String gettest(){
+        database.subroutine.IncommingDataCheck.tablesChecl();
+        return "Test api call";
+    }
+
+    @POST
+    @Path("addMatch")
+    @Produces("text/plain")
+    @Consumes("application/x-www-form-urlencoded")
+    public String addMatch(@FormParam("match") String match){
+        SubmitMatch submitMatch = (new Gson()).fromJson(match,SubmitMatch.class);
+        submitMatch.insertSQL(false);
+        return "POST DONE";
+    }
+
+
+
+
 
 
 
