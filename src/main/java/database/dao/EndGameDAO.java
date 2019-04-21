@@ -14,13 +14,12 @@ public class EndGameDAO {
     /**
      * The constant INSERT_SQL_QUERRY.
      */
-    public static final String INSERT_SQL_QUERRY = "INSERT INTO END_GAME (ID,LEVEL_ONE,LEVEL_TWO,LEVEL_THREE,RAMP,TIME_TO_CLIMB,FAIL_LEVEL,CLIMB_START,CLIMB_END) VALUES(?,?,?,?,?,?,?,?,?)";
+    public static final String INSERT_SQL_QUERRY = "INSERT INTO END_GAME (ID,LEVEL_ONE,LEVEL_TWO,LEVEL_THREE,RAMP,TIME_TO_CLIMB,FAIL_LEVEL,CLIMB_START,CLIMB_END,COMMENT,WAS_DEFENDED) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
     /**
      * The constant SELECT_SQL_QUERRY.
      */
     public static final String SELECT_SQL_QUERRY = "SELECT ID,LEVEL_ONE,LEVEL_TWO,LEVEL_THREE,RAMPS,TIME_TO_CLIMB,FAIL_LEVEL,CLIMB_START,CLIMB_END FROM END_GAME WHERE ID=?";
 
-    public static final String REMOVE_ENTRY = "DELETE FROM END_GAME WHERE ID = ?";
     /**
      * Insert auto sql.
      *
@@ -46,6 +45,8 @@ public class EndGameDAO {
             ps.setString(7, endGame.getFailLevel() + "");
             ps.setInt(8,endGame.getCimbStart());
             ps.setInt(9,endGame.getClimbEnd());
+            ps.setString(10,endGame.getComment());
+            ps.setBoolean(11,endGame.isWasDefended());
             con.setAutoCommit(false);
             ps.execute();
             System.out.println("SQL QUERRY ===> " + ps.toString());
@@ -89,15 +90,15 @@ public class EndGameDAO {
             rs = ps.executeQuery();
             System.out.println( "retriveCommands => " + ps.toString() );
 
-           endGame.setId(rs.getInt("ID"));
-           endGame.setLevelOne(rs.getBoolean("LEVEL_ONE"));
-           endGame.setLevelTwo(rs.getBoolean("LEVEL_TWO"));
-           endGame.setLevelThree(rs.getBoolean("LEVEL_THREE"));
-           endGame.setRamp(rs.getBoolean("RAMP"));
-           endGame.setTimeToClimb(rs.getFloat("TIME_TO_CLIMB"));
-           endGame.setFailLevel(rs.getString("FAIL_LEVEL").charAt(0));
-           endGame.setCimbStart(rs.getInt("CLIMB_START"));
-           endGame.setClimbEnd(rs.getInt("CLIMB_END"));
+            endGame.setId(rs.getInt("ID"));
+            endGame.setLevelOne(rs.getBoolean("LEVEL_ONE"));
+            endGame.setLevelTwo(rs.getBoolean("LEVEL_TWO"));
+            endGame.setLevelThree(rs.getBoolean("LEVEL_THREE"));
+            endGame.setRamp(rs.getBoolean("RAMP"));
+            endGame.setTimeToClimb(rs.getFloat("TIME_TO_CLIMB"));
+            endGame.setFailLevel(rs.getString("FAIL_LEVEL").charAt(0));
+            endGame.setCimbStart(rs.getInt("CLIMB_START"));
+            endGame.setClimbEnd(rs.getInt("CLIMB_END"));
 
 
         }
@@ -119,23 +120,6 @@ public class EndGameDAO {
             }
         }
         return endGame;
-    }
-
-    public static void deleteFromTable( int id) {
-        try {
-            Connection con = null;
-            PreparedStatement ps = null;
-            ResultSet rs = null;
-            con = DatabaseConfig.getLocalMySQLConn();
-            ps = con.prepareStatement(REMOVE_ENTRY);
-            ps.setInt(1,id);
-            rs = ps.executeQuery();
-            ps.close();
-            con.close();
-        }
-        catch (SQLException e){
-            e.printStackTrace();
-        }
     }
 
 
